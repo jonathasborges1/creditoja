@@ -37,16 +37,17 @@ const Theme = createTheme({
     },
     palette: {
       primary: {
-        main: "#e91e63", 
-        contrastText: "#fff",
+        main: "#000", 
+        contrastText: "#000",
         light: "#272B2D",
       },
       secondary: {
         main: "#03a9f4", 
         contrastText: "#fff",
+        light: "#FFB800",
       },
       error: {
-        main: "#C30C0C",
+        main: "#F97A91",
       },
       success: {
         main: "#5AC45F",

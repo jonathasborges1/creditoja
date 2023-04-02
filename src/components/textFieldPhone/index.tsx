@@ -1,8 +1,8 @@
-import { StandardTextFieldProps, TextField, Theme, createStyles } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-// import { makeStyles } from '@mui/styles';
-import { useFormikContext } from 'formik';
 import React from 'react';
+import { useFormikContext } from 'formik';
+
+import { StandardTextFieldProps, TextField, Theme } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
 interface Props extends StandardTextFieldProps  {
    children?: React.ReactNode;
@@ -11,6 +11,7 @@ interface Props extends StandardTextFieldProps  {
    label: string;
    value: string;
    onChange: (e) => void;
+   onBlur: (e) => void;
 }
 
 const TextFieldPhone: React.FC<Props> = ({ children, ...props }) => {
@@ -49,17 +50,29 @@ const TextFieldPhone: React.FC<Props> = ({ children, ...props }) => {
          name={props.name}
          label={props.label}
          value={formatPhone(props.value)}
-         onChange={handlePhoneChange }
-         // className={classes.root}
+         onChange={handlePhoneChange}
+         onBlur={props.onBlur}
+         error={props.error} // define a propriedade error como true quando ocorrer um erro
+         helperText={ props.value.length > 0 ? props.helperText: ""}
          inputProps={{
-            maxLength: 19,
+            maxLength: 19, // Delimita a quantidade maxima de caracteres no campo
+         }}
+         InputLabelProps={{
             classes: {
+               root: classes.InputLabelRoot,
+            }
+         }}
+         InputProps={{
+            classes: {
+               root: classes.InputRoot,
                notchedOutline: props.error ? `${classes.hasErrorFieldSet}` : ``,
              },
-          }}
+         }}
+         FormHelperTextProps={{
+            className: classes.helperText,
+         }}
          variant={"outlined"}
-         helperText={ props.value.length > 0 ? props.helperText: ""}
-         
+         required={props.required}
       />
    )
 }
@@ -68,44 +81,25 @@ export default TextFieldPhone;
 
 
 const useStyles = makeStyles((theme: Theme) => ({
-   root: {
-      "& input": {
-        boxShadow: "0px 0px 0px 30px white inset",
+   InputLabelRoot : {
+      "&.MuiInputLabel-root.Mui-focused" : { //  Controla cor da label no momento da digitacao
+         fontWeight: 700,
+         color: "#000",
       },
-      "& label": {
-        // Controle de estilo antes de digitar
-        opacity: 0.6,
-        fontSize: "1.4rem",
+   },
+   InputRoot: {
+      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+           border: `1px solid ${theme.palette.secondary.light} !important`, // Controla cor da borda durante Digitacao "#FFB800"
       },
-      "& .MuiInputBase-root": {
-        borderRadius: "1rem",
-      },
-      "& .MuiInputLabel-shrink": {
-        // Controle de estilo da "label" apos campo digitado // -> Equivalencia ->  "& .Mui-focused"
-        fontSize: "1.5rem",
-        opacity: 1,
-        color: theme.palette.text.primary,
-        fontWeight: 700,
-      },
-      "& .MuiInputBase-input": {
-        color: theme.palette.text.primary,
-        fontWeight: 500,
-      },
-      "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-        border: `1px solid ${theme.palette.secondary.light}`, // Controla cor da borda durante Digitacao "#FFB800"
-      },
-      "& .MuiFormHelperText-root.Mui-error.Mui-focused": {
-        // Esconde a mensagem de erro enquanto usuario estiver digitando
-        // opacity: 0,
-        display: "none",
-      },
-    },
+   },
    hasErrorFieldSet: {
       "& .MuiOutlinedInput-notchedOutline": {
         border: `1px solid ${theme.palette.error.main}`, // Sinalizacao de campo incorreto -> "#F97A91"
       },
-      "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-        border: `1px solid ${theme.palette.secondary.light}`, // Controla cor da borda durante Digitacao "#FFB800"
-      },
+    },
+    helperText: {
+      "&.MuiFormHelperText-root" : {
+         color: "red", // altere para do texto de apoio
+      }
     },
  }));

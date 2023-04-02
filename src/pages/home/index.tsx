@@ -55,8 +55,8 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
 {/* +++++++++++ Body +++++++++++ */}
             <Grid item xs={12} lg={10} sx={{border: "0px solid red"}}>
                 <Grid container justifyContent={"center"} sx={{textAlign: "center"}} gap={2}>
-                    <Grid item xs={8} sx={{margin: 5,border: "1px solid red"}}>
-                        <Typography variant={"h1"} sx={{fontWeight: 400, fontSize: "2.2rem"}} >  Faça agora uma simulação </Typography>
+                    <Grid item xs={8} sx={{margin: 5,border: "0px solid red"}}>
+                        <Typography variant={"h1"} sx={{fontWeight: 400, fontSize: "2.8rem"}} >  Faça agora uma simulação </Typography>
                         <Typography variant={"h6"} sx={{fontWeight: 700, fontSize: "1rem", marginTop: 2}} >  Preencha os dados abaixo. </Typography>
                         
                     </Grid>
