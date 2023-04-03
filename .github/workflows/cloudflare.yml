@@ -29,8 +29,9 @@ jobs:
           echo "export API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
           npm run build
 
-      - name: Publish
+      - name: Publish with CloudFlare
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: 2cdb8330894945d94acbf1ee20001547
+          configPath: './wrangler.toml'
