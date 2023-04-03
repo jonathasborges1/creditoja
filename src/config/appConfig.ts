@@ -20,4 +20,5 @@ const appConfig =  {
 
 export default appConfig;
 
-console.log("debug -> appConfig ", appConfig.api.key);
+console.log("App Running...")
+console.log("[CRITICAL DEBUG]: ", process.env.API_KEY)

@@ -85,17 +85,17 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
             try {
                const params = {
                   sender: {
-                     name: values.name,
-                     email: values.email, 
+                     name: appConfig.user.name,
+                     email: appConfig.user.email, 
                   },
                   to: [{
-                     name: "Jose Carlos",
-                     email: "creditoja@creditoja.net", 
+                     name: appConfig.user.name,
+                     email: appConfig.user.email, 
                   }],
                   cc: [{
-                     email: "jonathasborges0@gmail.com",
+                     email: appConfig.admin.email,
                   }],
-                  subject: "Lead Cadastrado - Indicado pela Finanzero",
+                  subject: "Sistema de Notificação de Email CreditoJa - Lead Indicado pela Finanzero",
                   htmlContent: emailBody(payloadValuesFormik),
                }
 
