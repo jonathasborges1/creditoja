@@ -43,13 +43,3 @@ jobs:
           api_token: ${{ secrets.CF_API_TOKEN }}
           site_id: creditoja.pages.dev
           script: npm run build
-
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: 2cdb8330894945d94acbf1ee20001547
-          projectName: creditoja
-          directory: ./
-          # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.TOKEN_GITHUB }}
