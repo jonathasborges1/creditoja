@@ -1,0 +1,20 @@
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy to Cloudflare Pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: 2cdb8330894945d94acbf1ee20001547
+          projectName: creditoja # e.g. 'my-project'
+          directory: ./build # e.g. 'dist'
+          gitHubToken: ${{ secrets.TOKEN_GITHUB }}

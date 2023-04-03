@@ -17,12 +17,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: 2cdb8330894945d94acbf1ee20001547
-          projectName: creditoja.pages.dev
-          directory: ./build
-          # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.TOKEN_GITHUB }}
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+        
+      - name: 🔨 Build application
+        env:
+          NODE_ENV: production
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          echo "export API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          npm run build
