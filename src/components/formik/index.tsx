@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Form, Formik } from "formik";
 import { useSnackbar } from "notistack";
 
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 import TextFieldPhone from '@components/textFieldPhone';
 import TextFieldCurrency from '@components/textFieldCurrency';
@@ -259,16 +259,20 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                       }
                      required
                   />
-                  <Button
-                     type={"submit"}
-                     variant={"contained"}
-                     sx={{
-                        background: "#149dcc", color: "#fff" ,padding: 1.4, width: "20%", fontSize: "1rem", 
-                        "&:hover": {backgroundColor: '#90ee90', color: '#000'}
-                     }}
-                  >
-                     Enviar
-                  </Button>
+                  <Box sx={{border: "0px solid purple", display: "flex", justifyContent:"left"}}>
+                     <Button
+                        type={"submit"}
+                        variant={"contained"}
+                        sx={{
+                           border: "0px solid black",
+                           background: "#149dcc", color: "#fff", padding: 1, pl: 4, pr: 4, fontSize: "1rem", 
+                           "&:hover": {backgroundColor: '#90ee90', color: '#000'}
+                        }}
+                     >
+                        Enviar
+                     </Button>
+                  </Box>
+
                </Form>
             )
             

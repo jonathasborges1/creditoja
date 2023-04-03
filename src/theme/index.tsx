@@ -63,7 +63,7 @@ const Theme = createTheme({
       },
       background: {
         default: "#fff",
-        paper: "#17191A",
+        paper: "#fff",
       },
       backgroundColor: {
         default: "#0E0F0F",
