@@ -31,6 +31,6 @@ jobs:
         with:
           personal_token: ${{ secrets.TOKEN_GITHUB }}
           external_repository: jonathasborges1/creditoja
-          publish_dir: ./
+          publish_dir: ./build
           cname: jonathasborges1.github.io
           commit_message: "Deploy to GitHub Pages"
