@@ -1,6 +1,8 @@
 const path = require("path");
+const Dotenv = require('dotenv-webpack');
 
-module.exports = function override(config) {
+module.exports = function override(config,env) {
+  config.plugins.push(new Dotenv({ silent: true }));
   config.resolve = {
     ...config.resolve,
     alias: {

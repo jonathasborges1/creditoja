@@ -24,9 +24,6 @@ const TextFieldCustom: React.FC<Props> = ({ children, ...props }) => {
       onBlur={props.onBlur}
       error={props.error} // define a propriedade error como true quando ocorrer um erro
       helperText={ props.value.length > 0 ? props.helperText: ""}
-      inputProps={{
-         maxLength: 19, // Delimita a quantidade maxima de caracteres no campo
-      }}
       InputLabelProps={{
          classes: {
             root: classes.InputLabelRoot,

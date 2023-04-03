@@ -61,6 +61,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                         
                     </Grid>
                     <Grid item xs={8}>
+{/* --------------------------- Modulo de Formulario  --------------------------- */}
                         <FormikSendEmail></FormikSendEmail>
                     </Grid>
                 </Grid>

@@ -1,13 +1,18 @@
 import React from 'react';
+import * as yup from "yup";
+import axios from 'axios';
 import { Form, Formik } from "formik";
 import { useSnackbar } from "notistack";
-import * as yup from "yup";
 
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 
 import TextFieldPhone from '@components/textFieldPhone';
 import TextFieldCurrency from '@components/textFieldCurrency';
 import TextFieldCustom from '@components/textFieldCustom';
+
+import { phoneNumberMask } from '@utils/index';
+import appConfig from '@config/appConfig';
+
 
 interface Props {
    children?: React.ReactNode;
@@ -45,31 +50,83 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       phone: yup.string().matches(/\(\d{2}\) \d{4,5}\-\d{4}|^\d{10,11}/g,"Insira um telefone válido! - Exemplo: +55 (92) 9 8829-0290").required("Este campo é obrigatório"),
     });
 
+    const emailBody = (valuesFormik: InitialValuesFormik | undefined): string => {
+      return `
+         <html>
+            <head></head>
+            <body>
+               <h1>Novo Cadastro Realizado pelo Site</h1>
+               <p>Informacoes de contato: </p>
+               <ul>
+                  <li>Nome: ${valuesFormik?.name}</li>
+                  <li>Email: ${valuesFormik?.email}</li>
+                  <li>Telefone: ${phoneNumberMask(valuesFormik?.phone)}</li>
+                  <li>Valor Estimado: ${valuesFormik?.valued}</li>
+                  <li>Tag: ${valuesFormik?.tag}</li>
+               </ul>
+            </body>
+         </html>
+      `;
+    }
+
    return (
       <Formik
          initialValues={initialValues}
          validationSchema={validationSchema}
-         onSubmit={(values,actions) => {
-            const payload = {
+         onSubmit={async(values,actions) => {
+            const payloadValuesFormik = {
                name: values.name,
                email: values.email,
                phone: values.phone,
                valued: values.valued,
                tag: values.tag,
             }
+
             try {
+               const params = {
+                  sender: {
+                     name: values.name,
+                     email: values.email, 
+                  },
+                  to: [{
+                     name: "Jose Carlos",
+                     email: "creditoja@creditoja.net", 
+                  }],
+                  cc: [{
+                     email: "jonathasborges0@gmail.com",
+                  }],
+                  subject: "Lead Cadastrado - Indicado pela Finanzero",
+                  htmlContent: emailBody(payloadValuesFormik),
+               }
+
+               const header = {
+                  headers : {
+                     "api-key": appConfig.api.key,
+                     'Content-Type': 'application/json',
+                     Accept: 'application/json',
+                  }
+               }
+
+               const response = await axios.post(`https://api.sendinblue.com/v3/smtp/email`,params,header);
+               console.log("[INFO]: ", response.data);
+
                enqueueSnackbar("Dados Enviados com sucesso!", {
                  variant: "success",
                });
+
+               setTimeout( () => {
+                  window.location.href = "https://creditoja.net/";
+               },15000);
+
             } catch (error) {
                console.log("[DEBUG]: Erro ao enviar formulario -> ", error)
                enqueueSnackbar("Ocorreu um erro ao Enviar Seus Dados", {
                   variant: "error",
                 });
             }
-
+            
             actions.resetForm(); // Limpa campos do formulario
-            console.log("debug -> ", payload);
+            
          }}
       >
          {(formikprops) => {
