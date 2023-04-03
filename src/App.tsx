@@ -34,7 +34,7 @@ const App: React.FC = () => {
               )}
         >
         <CssBaseline/> 
-          App running...
+          {/* App running... */}
         <Routes></Routes>
         </SnackbarProvider>
       </ThemeProviderLegacy>
