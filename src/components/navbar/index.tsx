@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Theme, useTheme } from '@mui/material';
+import { Box, Drawer, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Theme, useTheme } from '@mui/material';
 import { TouchApp } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 
@@ -72,12 +72,12 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
       };
 
       return(
-      <Box>
-         <MenuIcon onClick={handleToggle} sx={{fontSize: "3rem"}} />
+      <Box > 
+         <MenuIcon onClick={handleToggle} sx={{fontSize: "2.5rem"}} />
          <Drawer anchor="top" open={open} onClose={handleToggle}>
            <List>
              {menuItem.map((item,index) => (
-               <ListItem button key={index} onClick={handleToggle} href={item.href}> 
+               <ListItem button onClick={handleToggle} component={Link} href={item.href} key={index}> 
                  {/* <ListItemIcon>{item.icon}</ListItemIcon> */}
                  <ListItemText primary={item.label} />
                </ListItem>
