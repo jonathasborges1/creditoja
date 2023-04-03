@@ -38,7 +38,9 @@ jobs:
           commit_message: "Deploy to GitHub Pages"
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/cloudflare-pages-action@1.5.1
+        uses: cloudflare/cloudflare-pages-action@2.4.3
         with:
-          build_dir: ./build
-          api_token: ${{ secrets.CF_API_TOKEN }}
+          api-token: ${{ secrets.CF_API_TOKEN }}
+          account-id: ${{ secrets.CF_ACCOUNT_ID }}
+          script: npm run build
+          directory: build
