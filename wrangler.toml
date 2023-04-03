@@ -5,14 +5,13 @@ workers_dev = true
 
 [build]
 command = "npm run build"
-main = "./public/index.js"
-output = "public"
+main = "./build/index.js"
+output = "build"
 publish = true
-watch = ["src", "webpack.config.js"]
-routes = [{ pattern = "https://example.com/*", script = "my-worker" }]
+routes = [{ pattern = "https://creditoja.pages.dev/*", script = "my-worker" }]
 
 [site]
-bucket = "./public"
+bucket = "./build"
 entry-point = "worker"
 
 
