@@ -13,26 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Use Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-        
-      - name: 🔨 Build application
+
+      - name: Publish worker
+        run: npx wrangler publish
         env:
-          NODE_ENV: production
-          API_KEY: ${{ secrets.API_KEY }}
-        run: |
-          echo "export API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
-          npm run build
-
-      - name: Publish with CloudFlare
-        uses: cloudflare/wrangler-action@2.0.0
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: 2cdb8330894945d94acbf1ee20001547
-          configPath: './wrangler.toml'
-          publishCommand: 'wrangler publish --entry-point index.tsx'
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}

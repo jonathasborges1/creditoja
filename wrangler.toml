@@ -8,3 +8,22 @@ main = "index.tsx"
 account_id = "2cdb8330894945d94acbf1ee20001547"
 workers_dev = false
 route = "creditoja.pages.dev/*"
+
+
+name = "my-worker"
+type = "webpack"
+account_id = "2cdb8330894945d94acbf1ee20001547"
+workers_dev = true
+
+[build]
+command = "npm run build"
+output = "dist"
+
+[site]
+bucket = "./dist"
+entry-point = "worker"
+
+[routes]
+# Matches requests to `https://creditoja.pages.dev/*`
+# and maps them to the worker.
+"https://creditoja.pages.dev/*" = "my-worker"
