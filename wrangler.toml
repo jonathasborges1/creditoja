@@ -5,8 +5,11 @@ workers_dev = true
 
 [build]
 command = "npm run build"
+main = "./public/index.js"
 output = "public"
 publish = true
+watch = ["src", "webpack.config.js"]
+routes = [{ pattern = "https://example.com/*", script = "my-worker" }]
 
 [site]
 bucket = "./public"
