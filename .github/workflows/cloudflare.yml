@@ -10,7 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+        
+      - name: 🔨 Build application
+        env:
+          NODE_ENV: production
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          echo "export API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          npm run build
+
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
