@@ -21,4 +21,4 @@ const appConfig =  {
 export default appConfig;
 
 console.log("App Running...")
-console.log("[CRITICAL DEBUG]: ", process.env.REACT_APP_API_KEY)
+// console.log("[CRITICAL DEBUG]: ", process.env.REACT_APP_API_KEY)
