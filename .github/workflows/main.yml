@@ -26,13 +26,6 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
         run: npm run build
 
-      - name: Stage build files
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions@github.com"
-          git add -f build/*
-          git commit -m "Add build files"
-
       - name: Deploy GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
