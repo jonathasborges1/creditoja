@@ -27,3 +27,12 @@ jobs:
         run: |
           echo "export API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
           npm run build
+
+      - name: Deploy GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.TOKEN_GITHUB }}
+          external_repository: jonathasborges1/creditoja
+          publish_dir: ./build
+          cname: jonathasborges1.github.io
+          commit_message: "Deploy to GitHub Pages"
