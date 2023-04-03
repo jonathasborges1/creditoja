@@ -5,15 +5,15 @@ workers_dev = true
 
 [build]
 command = "npm run build"
-output = "dist"
+output = "public"
+publish = true
 
 [site]
-bucket = "./dist"
+bucket = "./public"
 entry-point = "worker"
 
 [routes]
-# Matches requests to `https://creditoja.pages.dev/*`
-# and maps them to the worker.
-"https://creditoja.pages.dev/*" = "my-worker"
+pattern = "https://creditoja.pages.dev/*"
+script = "my-worker"
 
 
