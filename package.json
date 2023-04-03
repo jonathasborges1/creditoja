@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "API_KEY=$API_KEY react-app-rewired build",
+    "build": "REACT_APP_API_KEY=$REACT_APP_API_KEY react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },

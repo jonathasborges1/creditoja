@@ -7,7 +7,7 @@ const appConfig =  {
    },
    api: {
       url: "https://api.sendinblue.com/v3/smtp/email",
-      key: process.env.API_KEY,
+      key: process.env.REACT_APP_API_KEY,
    },
    user: {
       name: "Jose Carlos",
@@ -21,4 +21,4 @@ const appConfig =  {
 export default appConfig;
 
 console.log("App Running...")
-console.log("[CRITICAL DEBUG]: ", process.env.API_KEY)
+console.log("[CRITICAL DEBUG]: ", process.env.REACT_APP_API_KEY)

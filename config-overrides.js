@@ -1,8 +1,16 @@
 const path = require("path");
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = function override(config,env) {
-  config.plugins.push(new Dotenv({ silent: true }));
+  // config.plugins.push(new Dotenv({ silent: true }));
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        REACT_APP_API_KEY: JSON.stringify(process.env.REACT_APP_API_KEY),
+      },
+    })
+  );
   config.resolve = {
     ...config.resolve,
     alias: {
