@@ -33,7 +33,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: 2cdb8330894945d94acbf1ee20001547
-          projectName: creditoja
-          directory: ./
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.TOKEN_GITHUB }}
