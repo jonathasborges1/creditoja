@@ -13,7 +13,6 @@ bucket = "./public"
 entry-point = "worker"
 
 [routes]
-pattern = "https://creditoja.pages.dev/*"
-script = "my-worker"
+{ pattern = "https://creditoja.pages.dev/*", script = "my-worker" }
 
 
