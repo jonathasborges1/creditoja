@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/creditoja/static/js/main.e85e6c83.chunk.js",
+    "main.js.map": "/creditoja/static/js/main.e85e6c83.chunk.js.map",
+    "runtime-main.js": "/creditoja/static/js/runtime-main.a9c71c3b.js",
+    "runtime-main.js.map": "/creditoja/static/js/runtime-main.a9c71c3b.js.map",
+    "static/js/2.133f1388.chunk.js": "/creditoja/static/js/2.133f1388.chunk.js",
+    "static/js/2.133f1388.chunk.js.map": "/creditoja/static/js/2.133f1388.chunk.js.map",
+    "static/js/3.ca83f9a3.chunk.js": "/creditoja/static/js/3.ca83f9a3.chunk.js",
+    "static/js/3.ca83f9a3.chunk.js.map": "/creditoja/static/js/3.ca83f9a3.chunk.js.map",
+    "index.html": "/creditoja/index.html",
+    "static/js/2.133f1388.chunk.js.LICENSE.txt": "/creditoja/static/js/2.133f1388.chunk.js.LICENSE.txt",
+    "static/media/creditoja-logotipo.0c60bafb.jpg": "/creditoja/static/media/creditoja-logotipo.0c60bafb.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a9c71c3b.js",
+    "static/js/2.133f1388.chunk.js",
+    "static/js/main.e85e6c83.chunk.js"
+  ]
+}
