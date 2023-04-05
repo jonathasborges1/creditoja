@@ -1,4 +1,6 @@
-Projeto disponivel : https://creditoja.pages.dev/
+# Projeto disponivel em: 
+
+- https://creditoja.pages.dev/
 
 
 # Getting Started with Create React App
