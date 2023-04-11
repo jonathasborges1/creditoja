@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Box, Drawer, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Theme, useTheme } from '@mui/material';
+import { Box, Drawer, Link, List, ListItem, ListItemButton, ListItemText, Theme, useTheme } from '@mui/material';
 import { TouchApp } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 
@@ -38,9 +38,10 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
 
    const NavBarDesktop: React.FC = () => {
       return(
-      <List 
-            component={"nav"}
-            sx={{display: "inline-flex", gap: 1.5,fontWeight:600, fontSize: "1rem"}}
+      <List component={"nav"}
+            sx={{
+               display: "inline-flex", gap: 1.5, fontWeight:600, fontSize: "1rem", border: "0px solid red", padding:0,
+            }}
       >
             <ListItemButton sx={{p:1}} href={"https://creditoja.net/index.html"} >Home</ListItemButton>
             <ListItemButton sx={{p:1}} href={"https://creditoja.net/page1.html"} >Serviços</ListItemButton>
@@ -72,7 +73,7 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
       };
 
       return(
-      <Box > 
+      <Box> 
          <MenuIcon onClick={handleToggle} sx={{fontSize: "2.5rem"}} />
          <Drawer anchor="top" open={open} onClose={handleToggle}>
            <List>
