@@ -6,6 +6,8 @@ import { TouchApp } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 
 import MenuIcon from '@mui/icons-material/Menu';
+import ROUTES from '@config/routes';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
    children?: React.ReactNode;
@@ -13,7 +15,8 @@ interface Props {
 
 const NavBar: React.FC<Props> = ({ children, ...props }) => {
    const classes = useStyles();
-   const theme = useTheme();
+   const theme = useTheme();    
+   const history = useHistory();
 
    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -36,6 +39,15 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
       },
    ]
 
+   const handleRedirectHome = () => {
+      history.push(ROUTES.HOME);
+  }
+
+  const handleRedirectContact = () => {
+   history.push(ROUTES.CONTACT);
+}
+
+
    const NavBarDesktop: React.FC = () => {
       return(
       <List component={"nav"}
@@ -43,16 +55,16 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
                display: "inline-flex", gap: 1.5, fontWeight:600, fontSize: "1rem", border: "0px solid red", padding:0,
             }}
       >
-            <ListItemButton sx={{p:1}} href={"https://creditoja.net/index.html"} >Home</ListItemButton>
+            <ListItemButton sx={{p:1}} onClick={handleRedirectHome}>Home</ListItemButton>
             <ListItemButton sx={{p:1}} href={"https://creditoja.net/page1.html"} >Serviços</ListItemButton>
             <ListItemButton sx={{p:1,mr:0.5}} href={"https://creditoja.net/page2.html"} >Sobre Nós</ListItemButton>
-            <ListItemButton 
+            <ListItemButton onClick={handleRedirectContact}
                sx={{
                   p:1, pl:3, paddingRight:3, 
                   border: "0px solid red", borderRadius: 10, 
                   backgroundColor: "#149dcc", color: "#fff", "&:hover": {backgroundColor: '#000', color: '#149dcc'}
                }} 
-               href={"#"} >
+             >
                <TouchApp 
                   className={classes.touchApp}
                   sx={{ 

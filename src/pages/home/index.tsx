@@ -1,19 +1,29 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Button, Card, CardActions, CardContent, CardMedia, Grid,  Typography, useMediaQuery, useTheme, } from '@mui/material';
+
 import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import TouchAppOutlinedIcon from '@mui/icons-material/TouchAppOutlined';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
+import Filter2OutlinedIcon from '@mui/icons-material/Filter2Outlined';
+import Filter3OutlinedIcon from '@mui/icons-material/Filter3Outlined';
+import Filter4OutlinedIcon from '@mui/icons-material/Filter3Outlined';
 
-import logotipo from "@assets/creditoja-logotipo.jpg";
+import { mdiInstagram } from '@mdi/js';
+import { mdiFacebook } from '@mdi/js';
+
 import banner from "@assets/creditoja-banner.jpg";
 import blog1 from "@assets/creditoja-blog1.jpg";
 import blog2 from "@assets/creditoja-blog2.jpg";
 
 import FormikSendEmail from '@components/formik';
-import NavBar from '@components/navbar';
+import Icon from '@mdi/react';
+import ROUTES from '@config/routes';
+import Header from '@components/header';
 interface Props {
     children?: React.ReactNode;
 }
@@ -21,6 +31,7 @@ interface Props {
 const Home: React.FC<Props> = ({ children, ...props }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.only("xs"));
+    const history = useHistory();
 
     const [isTop, setIsTop] = React.useState(true);
 
@@ -37,6 +48,10 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
       return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+
+    const handleRedirectForm = () => {
+        history.push(ROUTES.CONTACT);
+    }
 
     const HomeSection: React.FC = () => { 
         return(
@@ -107,10 +122,11 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                     <Typography variant={"h6"} sx={{fontWeight: 500}} >Com um imóvel em garantia, você paga menos juros, já que os riscos são menores.</Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid red"}}>
-                    <Grid container justifyContent={"center"} sx={{margin: isMobile? 1 : 5}}>
+                    <Grid container justifyContent={"center"} sx={{padding: isMobile? 2 : 5}}>
                         <Grid item xs={12} sm={8} md={8} lg={6} sx={{border: "0px solid blue"}}>
-                            <iframe width={isMobile? "360" : "560" }  height={isMobile? "215" : "315" } 
-                                // style={{position: "relative"}}
+                            <iframe 
+                                width={"100%"}
+                                height={isMobile? "200" : "360"}
                                 src="https://www.youtube.com/embed/6EcqrSb-EXg" 
                                 title="YouTube video player" 
                                 frameBorder="0" 
@@ -126,9 +142,9 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
 
     const BlogSection: React.FC = () => {
         return(
-            <Grid container justifyContent={"center"} gap={0.5} sx={{backgroundColor: "#efefef"}} >
+            <Grid container justifyContent={"center"} gap={0.5} sx={{backgroundColor: "#efefef", p: "2rem 0px"}}>
                 <Grid item xs={12} sm={6} md={6} lg={3.9} sx={{p:2}}>
-                    <Card sx={{p:2}}>
+                    <Card sx={{p:2,}}>
                         <CardMedia image={blog1} sx={{ height: 140 }} title="Blog 1"></CardMedia>
                         <CardContent>
                             <Typography variant="body2" sx={{fontSize: "1rem", fontWeight:500}} color="text.secondary">
@@ -173,64 +189,144 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
 
     const NowSection: React.FC = () => {
         return(
-            <Grid container justifyContent={"center"} sx={{border: "0px solid blue", pt: 2, pb:2}}>
-                <Grid item xs={12} sm={11} md={11} lg={10}>
-                    <Grid container justifyContent={"center"} sx={{border: "0px solid red"}}>
-                        <Grid item xs={12} sm={6} md={6} lg={6}>
-                            <Typography variant='h2'sx={{fontSize: "1.4rem", fontWeight:500}} >Garanta o seu Credito Agora!</Typography>
-                            <Typography variant='h3' sx={{fontSize: "2.5rem", fontWeight:700}} >Faça agora sua simulação</Typography>
+            <Grid container justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid blue", textAlign:"center", pt: 5, pb:5}} gap={2}>
+                <Grid item xs={12} sm={11} md={11} lg={5}>
+                    <Grid container justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid red"}}>
+                        <Grid item xs={12} sm={6} md={6} lg={8}>
+                            <Typography variant='h2'sx={{fontSize: "1.4rem", fontWeight:500 ,mb: 2}} >Garanta o seu Credito Agora!</Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={3} textAlign={"center"}>
-                            <Button sx={{backgroundColor: "#149dcc", color: "#fff", borderRadius: 5 , p:2}} >
-                                <WhatsAppIcon sx={{fontSize: "2rem", marginRight:0.5}} ></WhatsAppIcon>
-                                <Typography variant='h2' sx={{fontSize: "1.4rem", fontWeight:600, }} >SIMULE AGORA</Typography>
-                            </Button>
-                        
+                        <Grid item xs={12} sm={6} md={6} lg={10} sx={{border: "0px solid black"}} >
+                            <Typography variant='h3' sx={{fontSize: "2.2rem", fontWeight:700}} >Faça agora sua simulação</Typography>
                         </Grid>
+
                     </Grid>
                 </Grid>
-
-
+                <Grid item xs={12} sm={11} md={11} lg={3} sx={{border: "0px solid purple",}}>
+                    <Button sx={{backgroundColor: "#149dcc", color: "#fff", borderRadius: 5 , p: isMobile? 1 : 2}} onClick={handleRedirectForm} >
+                        <WhatsAppIcon sx={{fontSize: "2rem", marginRight:0.5}} ></WhatsAppIcon>
+                        <Typography variant='h2' sx={{fontSize: isMobile? "1rem" :"1.4rem", fontWeight:600, }} >SIMULE AGORA</Typography>
+                    </Button> 
+                </Grid>
             </Grid>
         )
     }
 
+    const CreditModalitySection: React.FC = () => {
+        return(
+            <Grid container justifyContent={"center"} sx={{backgroundColor: "#efefef" , p: "2rem 8px", }} gap={2}>
+                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red"}} >
+                    <Typography variant='h2' sx={{fontSize: isMobile? "1.5rem" : "2rem", fontWeight: 700}} > Veja como funciona a nossa modalidade de crédito </Typography>
+                </Grid>
+                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
+                    <Filter1OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter1OutlinedIcon>
+                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
+                       <b>Primeiro atendimento</b>  -  Você nos fala um pouco sobre você, o imóvel e quanto quer emprestado.
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
+                    <Filter2OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter2OutlinedIcon>
+                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
+                       <b>Anãlise</b>  -  Realizaremos a pré-análise do crédito em no mãximo 2 dias úteis e entraremos em contato com vocë.
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
+                    <Filter3OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter3OutlinedIcon>
+                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
+                       <b>Contrato </b>  -  Com a anãlise aprovada, formalizaremos o contrato do empréstimo e coletamo a sua assinatura.
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
+                    <Filter4OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter4OutlinedIcon>
+                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
+                       <b>Depósito</b>  -  Após assinar o contrato, dinheiro cairá na sua conta em no máximoaté 3 dias úteis.
+                    </Typography>
+                </Grid>
+            </Grid>
+        )
+    } 
 
+    const SocialMediaSection: React.FC = () => {
+        return(
+            <Grid container component={"section"} justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid blue", textAlign:"center", pt: 5, pb:5}} gap={2} >
+                
+                <Grid item xs={12} sm={11} md={11} lg={12}>
+                    <Typography variant='h3' sx={{fontWeight: 500, }} > SIGA A CREDITOJA </Typography>
+                </Grid>
+
+                <Grid item xs={12} sm={11} md={11} lg={1} sx={{display: "flex", justifyContent:"center", gap:2, border: "0px solid red" , }} >
+                    <a href="https://instagram.com/creditoja">
+                        <Icon path={mdiInstagram} style={{color: "#149dcc"}} size={2} />
+                    </a>
+                    <a href="#">
+                        <Icon path={mdiFacebook} style={{color: "#149dcc"}} size={2} />
+                    </a>
+                </Grid>
+                
+            </Grid>
+        )
+    }
+
+    const MapSection: React.FC = () => {
+        return(
+            <Grid container justifyContent={"center"} sx={{backgroundColor:  "#149dcc", border: "0px solid blue", padding:2}} gap={2}>
+                <Grid item xs={12} sm={12} md={12} lg={10}>
+                    <Typography variant='h2' sx={{fontWeight: 700, fontSize:"2.4rem"}}> Nossos Contatos</Typography>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={10}>
+                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1rem"}}> CNPJ:  <span style={{color: "#fff", fontWeight: 500}}>39.689.939/0001-40</span></Typography>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={10}>
+                    <Grid container>
+                        <Grid item xs={12} sm={12} md={12} lg={6} sx={{border: "0px solid red"}} >
+                            <Grid container alignItems={"center"} gap={3}> 
+                                <Grid item xs={12} lg={12}>
+                                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Endereço:</Typography>
+                                    <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}> Rua Albion 536 - Sala 02 - Lapa - CEP 05077-130</Typography>
+                                </Grid>
+                                <Grid item xs={12} lg={12}>
+                                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Telefone:</Typography>
+                                    <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}> Com: 2538-4752 | Cel: (11) 95210-2875 |  (11) 96364.0668 | (11) 3832- 9358</Typography>
+                                </Grid>
+                                <Grid item xs={12} lg={12}>
+                                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Email:</Typography>
+                                    <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}>creditoja@creditoja.net</Typography>
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6} sx={{border: "0px solid blue",}}> 
+            
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3658.2495623052628!2d-46.7098176!3d-23.5235248!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef889cff7058b%3A0x54950d48e1c64ba4!2sR.%20Albion%2C%20536%20-%20Lapa%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005077-130%2C%20Brasil!5e0!3m2!1spt-BR!2sus!4v1681239418106!5m2!1spt-BR!2sus"
+                                title="Google Maps" 
+                                aria-hidden="true" 
+                                frameBorder="0" 
+                                loading="lazy"
+                                height="300"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                style={{  width: "100%", top: 0, left: 0, border: "none",}}> 
+                            </iframe>
+  
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        )
+    }
+    
     return (
         <Grid container justifyContent={"center"} sx={{border: "0px solid blue", padding:0}} gap={1}>
 
             <Grid item xs={12} lg={12}  sx={{border: "0px solid red", marginBottom: isMobile ? "3rem" : "5rem",  }} >
 {/* ++++++++++++++++++++ Header ++++++++++++++++++++ */}
-                <Grid container
-                    sx={{
-                        border: "0px solid blue", 
-                        position: "fixed", backgroundColor: "#fff", 
-                        padding: isMobile? "8px 16px 4px 16px" : "0px 10rem 0px 15rem",
-                        display: "flex", justifyContent: "space-between", top: 0, zIndex:3,
-                    }}
-                >
-{/* --------------------------- Logotipo --------------------------- */}
-                    <Grid item xs={4} sm={2} md={2} lg={1.5} sx={{border: "0px solid red",}}>
-
-                        {isMobile? 
-                            (<img src={logotipo} alt="logotipo" width={isTop ? "80%" : "60%"} height={"auto"} style={{ transition: 'all 0.5s ease' }} />) 
-                        : 
-                            (<img src={logotipo} alt="logotipo" width={isTop ? "100%" : "75%"} height={"auto"} style={{ transition: 'all 0.5s ease' }} />)
-                        }
-
-                    </Grid>
-{/* --------------------------- Menu Navegacao  --------------------------- */} 
-                    <Grid item xs={6} sm={9} md={8} lg={8} sx={{display: "flex", justifyContent: "end", alignItems: "center", border: "0px solid blue", p:0, m:0}} >
-                        <NavBar></NavBar>
-                    </Grid>
-                </Grid>
+                <Header></Header>
             </Grid>
 
 
 
 {/* +++++++++++ Body +++++++++++ */}
 
-            {/* <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
+            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
                 <HomeSection></HomeSection>
             </Grid>
 
@@ -238,16 +334,28 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                 <ServiceSection></ServiceSection>
             </Grid>
             
-            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
+            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue",}}>
                 <BlogSection></BlogSection>
             </Grid>
 
             <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
                 <NowSection></NowSection>
-            </Grid> */}
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
+                <CreditModalitySection></CreditModalitySection>
+            </Grid>
+            
+            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
+                <SocialMediaSection></SocialMediaSection>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
+                <MapSection></MapSection>
+            </Grid>
 
             
-
+            
             <Grid item xs={12} sm={10} md={10} lg={9} sx={{border: "0px solid blue"}}>
                 <Grid container justifyContent={"center"} sx={{textAlign: "center"}} gap={2}>
                     <Grid item xs={12} sm={9} md={9} lg={8} sx={{margin: 1,border: "0px solid red"}}>
