@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Card, CardActions, CardContent, CardMedia, Grid,  Typography, useMediaQuery, useTheme, } from '@mui/material';
+import {  Grid, useMediaQuery, useTheme, } from '@mui/material';
 
 import NavBar from '@components/navbar';
 import logotipo from "@assets/creditoja-logotipo.jpg";

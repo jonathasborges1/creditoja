@@ -8,10 +8,7 @@ import TouchAppOutlinedIcon from '@mui/icons-material/TouchAppOutlined';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
-import Filter2OutlinedIcon from '@mui/icons-material/Filter2Outlined';
-import Filter3OutlinedIcon from '@mui/icons-material/Filter3Outlined';
-import Filter4OutlinedIcon from '@mui/icons-material/Filter3Outlined';
+
 
 import { mdiInstagram } from '@mdi/js';
 import { mdiFacebook } from '@mdi/js';
@@ -24,6 +21,7 @@ import FormikSendEmail from '@components/formik';
 import Icon from '@mdi/react';
 import ROUTES from '@config/routes';
 import Header from '@components/header';
+import CreditModalitySection from '@components/creditModalitySection';
 interface Props {
     children?: React.ReactNode;
 }
@@ -52,6 +50,10 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
     const handleRedirectForm = () => {
         history.push(ROUTES.CONTACT);
     }
+
+    const handleRedirectService = () => {
+        history.push(ROUTES.SERVICES);
+     }
 
     const HomeSection: React.FC = () => { 
         return(
@@ -92,7 +94,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} lg={7} sx={{border: "0px solid blue", zIndex: 2}} textAlign={"center"} >
-                    <Button sx={{backgroundColor: "#e17d19", borderRadius: 8, padding: "16px 32px 16px 32px", "&:hover": {backgroundColor: "green"} }}> 
+                    <Button onClick={handleRedirectService} sx={{backgroundColor: "#e17d19", borderRadius: 8, padding: "16px 32px 16px 32px", "&:hover": {backgroundColor: "green"} }}> 
                         <HelpCenterOutlinedIcon sx={{color:'#fff', marginRight: 0.5}}></HelpCenterOutlinedIcon>
                         <Typography variant='h2' 
                             sx={{color:"#fff", fontSize:"1rem", fontWeight: 700 }}
@@ -152,7 +154,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="large" sx={{backgroundColor: "#149dcc", color: "#fff", fontSize:"1rem", borderRadius: 2}}>Saiba Mais</Button>
+                            <Button onClick={handleRedirectService} size="large" sx={{backgroundColor: "#149dcc", color: "#fff", fontSize:"1rem", borderRadius: 2}}>Saiba Mais</Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -165,7 +167,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                             Com nosso modelo de empréstimo, o valor pode ser usado para qualquer finalidade, pois não é necessário especificar o destino do empréstimo solicitado, ao contrário das outras modalidades de empréstimo.                            </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="large" sx={{backgroundColor: "#149dcc", color: "#fff", fontSize:"1rem", borderRadius: 2}}>Saiba Mais</Button>
+                            <Button onClick={handleRedirectService} size="large" sx={{backgroundColor: "#149dcc", color: "#fff", fontSize:"1rem", borderRadius: 2}}>Saiba Mais</Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -179,7 +181,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="large" sx={{backgroundColor: "#149dcc", color: "#fff", fontSize:"1rem", borderRadius: 2}}>Saiba Mais</Button>
+                            <Button onClick={handleRedirectService} size="large" sx={{backgroundColor: "#149dcc", color: "#fff", fontSize:"1rem", borderRadius: 2}}>Saiba Mais</Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -210,40 +212,6 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
             </Grid>
         )
     }
-
-    const CreditModalitySection: React.FC = () => {
-        return(
-            <Grid container justifyContent={"center"} sx={{backgroundColor: "#efefef" , p: "2rem 8px", }} gap={2}>
-                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red"}} >
-                    <Typography variant='h2' sx={{fontSize: isMobile? "1.5rem" : "2rem", fontWeight: 700}} > Veja como funciona a nossa modalidade de crédito </Typography>
-                </Grid>
-                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
-                    <Filter1OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter1OutlinedIcon>
-                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
-                       <b>Primeiro atendimento</b>  -  Você nos fala um pouco sobre você, o imóvel e quanto quer emprestado.
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
-                    <Filter2OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter2OutlinedIcon>
-                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
-                       <b>Anãlise</b>  -  Realizaremos a pré-análise do crédito em no mãximo 2 dias úteis e entraremos em contato com vocë.
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
-                    <Filter3OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter3OutlinedIcon>
-                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
-                       <b>Contrato </b>  -  Com a anãlise aprovada, formalizaremos o contrato do empréstimo e coletamo a sua assinatura.
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} sm={8} md={8} lg={8} sx={{border: "0px solid red", display: "flex", alignItems:"center"}}>
-                    <Filter4OutlinedIcon sx={{ color: "#149dcc" ,fontSize: "3rem", mr: 1}}></Filter4OutlinedIcon>
-                    <Typography variant='body1' sx={{fontSize: isMobile? "0.8rem" : "1rem", fontWeight:5700}} > 
-                       <b>Depósito</b>  -  Após assinar o contrato, dinheiro cairá na sua conta em no máximoaté 3 dias úteis.
-                    </Typography>
-                </Grid>
-            </Grid>
-        )
-    } 
 
     const SocialMediaSection: React.FC = () => {
         return(

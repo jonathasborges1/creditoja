@@ -47,6 +47,10 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
    history.push(ROUTES.CONTACT);
 }
 
+   const handleRedirectService = () => {
+      history.push(ROUTES.SERVICES);
+   }
+
 
    const NavBarDesktop: React.FC = () => {
       return(
@@ -56,7 +60,7 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
             }}
       >
             <ListItemButton sx={{p:1}} onClick={handleRedirectHome}>Home</ListItemButton>
-            <ListItemButton sx={{p:1}} href={"https://creditoja.net/page1.html"} >Serviços</ListItemButton>
+            <ListItemButton sx={{p:1}} onClick={handleRedirectService} >Serviços</ListItemButton>
             <ListItemButton sx={{p:1,mr:0.5}} href={"https://creditoja.net/page2.html"} >Sobre Nós</ListItemButton>
             <ListItemButton onClick={handleRedirectContact}
                sx={{
