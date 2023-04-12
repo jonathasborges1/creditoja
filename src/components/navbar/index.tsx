@@ -23,19 +23,19 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
    const menuItem = [
       {
          label: "Home",
-         href: "https://creditoja.net/index.html"
+         href: ROUTES.HOME
       },
       {
          label: "Serviços",
-         href: "https://creditoja.net/page1.html"
+         href: ROUTES.SERVICES
       },
       {
          label: "Sobre Nós",
-         href: "https://creditoja.net/page2.html"
+         href: ROUTES.ABOUT
       },
       {
          label: "SIMULE AGORA",
-         href: "#"
+         href: ROUTES.CONTACT
       },
    ]
 
@@ -51,6 +51,10 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
       history.push(ROUTES.SERVICES);
    }
 
+   const handleRedirectAbout = () => {
+      history.push(ROUTES.ABOUT);
+   }
+
 
    const NavBarDesktop: React.FC = () => {
       return(
@@ -61,7 +65,7 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
       >
             <ListItemButton sx={{p:1}} onClick={handleRedirectHome}>Home</ListItemButton>
             <ListItemButton sx={{p:1}} onClick={handleRedirectService} >Serviços</ListItemButton>
-            <ListItemButton sx={{p:1,mr:0.5}} href={"https://creditoja.net/page2.html"} >Sobre Nós</ListItemButton>
+            <ListItemButton sx={{p:1,mr:0.5}} onClick={handleRedirectAbout} >Sobre Nós</ListItemButton>
             <ListItemButton onClick={handleRedirectContact}
                sx={{
                   p:1, pl:3, paddingRight:3, 

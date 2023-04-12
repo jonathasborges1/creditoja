@@ -22,6 +22,8 @@ import Icon from '@mdi/react';
 import ROUTES from '@config/routes';
 import Header from '@components/header';
 import CreditModalitySection from '@components/creditModalitySection';
+import OurMapsSection from '@components/ourContactMaps';
+import SimulateNowSection from '@components/simulateNowSection';
 interface Props {
     children?: React.ReactNode;
 }
@@ -189,30 +191,6 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
         )
     }
 
-    const NowSection: React.FC = () => {
-        return(
-            <Grid container justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid blue", textAlign:"center", pt: 5, pb:5}} gap={2}>
-                <Grid item xs={12} sm={11} md={11} lg={5}>
-                    <Grid container justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid red"}}>
-                        <Grid item xs={12} sm={6} md={6} lg={8}>
-                            <Typography variant='h2'sx={{fontSize: "1.4rem", fontWeight:500 ,mb: 2}} >Garanta o seu Credito Agora!</Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={10} sx={{border: "0px solid black"}} >
-                            <Typography variant='h3' sx={{fontSize: "2.2rem", fontWeight:700}} >Faça agora sua simulação</Typography>
-                        </Grid>
-
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} sm={11} md={11} lg={3} sx={{border: "0px solid purple",}}>
-                    <Button sx={{backgroundColor: "#149dcc", color: "#fff", borderRadius: 5 , p: isMobile? 1 : 2}} onClick={handleRedirectForm} >
-                        <WhatsAppIcon sx={{fontSize: "2rem", marginRight:0.5}} ></WhatsAppIcon>
-                        <Typography variant='h2' sx={{fontSize: isMobile? "1rem" :"1.4rem", fontWeight:600, }} >SIMULE AGORA</Typography>
-                    </Button> 
-                </Grid>
-            </Grid>
-        )
-    }
-
     const SocialMediaSection: React.FC = () => {
         return(
             <Grid container component={"section"} justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid blue", textAlign:"center", pt: 5, pb:5}} gap={2} >
@@ -230,54 +208,6 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                     </a>
                 </Grid>
                 
-            </Grid>
-        )
-    }
-
-    const MapSection: React.FC = () => {
-        return(
-            <Grid container justifyContent={"center"} sx={{backgroundColor:  "#149dcc", border: "0px solid blue", padding:2}} gap={2}>
-                <Grid item xs={12} sm={12} md={12} lg={10}>
-                    <Typography variant='h2' sx={{fontWeight: 700, fontSize:"2.4rem"}}> Nossos Contatos</Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={10}>
-                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1rem"}}> CNPJ:  <span style={{color: "#fff", fontWeight: 500}}>39.689.939/0001-40</span></Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={10}>
-                    <Grid container>
-                        <Grid item xs={12} sm={12} md={12} lg={6} sx={{border: "0px solid red"}} >
-                            <Grid container alignItems={"center"} gap={3}> 
-                                <Grid item xs={12} lg={12}>
-                                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Endereço:</Typography>
-                                    <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}> Rua Albion 536 - Sala 02 - Lapa - CEP 05077-130</Typography>
-                                </Grid>
-                                <Grid item xs={12} lg={12}>
-                                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Telefone:</Typography>
-                                    <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}> Com: 2538-4752 | Cel: (11) 95210-2875 |  (11) 96364.0668 | (11) 3832- 9358</Typography>
-                                </Grid>
-                                <Grid item xs={12} lg={12}>
-                                    <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Email:</Typography>
-                                    <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}>creditoja@creditoja.net</Typography>
-                                </Grid>
-                            </Grid>
-
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={6} sx={{border: "0px solid blue",}}> 
-            
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3658.2495623052628!2d-46.7098176!3d-23.5235248!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef889cff7058b%3A0x54950d48e1c64ba4!2sR.%20Albion%2C%20536%20-%20Lapa%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005077-130%2C%20Brasil!5e0!3m2!1spt-BR!2sus!4v1681239418106!5m2!1spt-BR!2sus"
-                                title="Google Maps" 
-                                aria-hidden="true" 
-                                frameBorder="0" 
-                                loading="lazy"
-                                height="300"
-                                referrerPolicy="no-referrer-when-downgrade"
-                                style={{  width: "100%", top: 0, left: 0, border: "none",}}> 
-                            </iframe>
-  
-                        </Grid>
-                    </Grid>
-                </Grid>
             </Grid>
         )
     }
@@ -307,7 +237,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
             </Grid>
 
             <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
-                <NowSection></NowSection>
+                <SimulateNowSection></SimulateNowSection>
             </Grid>
 
             <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
@@ -319,7 +249,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
             </Grid>
 
             <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
-                <MapSection></MapSection>
+                <OurMapsSection></OurMapsSection>
             </Grid>
 
             

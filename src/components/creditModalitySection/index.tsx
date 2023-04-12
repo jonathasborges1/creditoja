@@ -44,7 +44,6 @@ const CreditModalitySection: React.FC = () => {
                </Grid>
             </Grid>
          </Grid>
-
        </Grid>
    )
 } 

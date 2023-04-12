@@ -13,6 +13,7 @@ const SimulateNowSection: React.FC = () => {
    const handleRedirectForm = () => {
       history.push(ROUTES.CONTACT);
    }
+   
    return(
        <Grid container justifyContent={"center"} alignItems={"center"} sx={{border: "0px solid blue", textAlign:"center", pt: 5, pb:5}} gap={2}>
            <Grid item xs={12} sm={11} md={11} lg={5}>

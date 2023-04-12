@@ -1,8 +1,11 @@
-import CreditModalitySection from '@components/creditModalitySection';
-import Header from '@components/header';
-import SimulateNowSection from '@components/simulateNowSection';
-import { Grid, Typography } from '@mui/material';
 import React from 'react';
+
+import { Grid, Typography } from '@mui/material';
+
+import CreditModalitySection from '@components/creditModalitySection';
+import SimulateNowSection from '@components/simulateNowSection';
+import OurMapsSection from '@components/ourContactMaps';
+import Header from '@components/header';
 
 interface Props {
     children?: React.ReactNode;
@@ -10,13 +13,11 @@ interface Props {
 
 const Services: React.FC<Props> = ({ children, ...props }) => {
 
-
-
     return (
         <Grid container justifyContent={"center"} alignItems={"center"} gap={2}>
             <Header></Header>
 
-            <Grid item xs={12} sm={12} md={12} lg={8}  sx={{border: "0px solid blue", pt:4,pb:4}}>
+            <Grid item xs={12} sm={12} md={12} lg={8}  sx={{border: "0px solid blue", pt:4,pb:4, pl:2, pr:2}}>
                 {/* <h1>titulo</h1> */}
                 <Typography variant='h1' sx={{fontWeight: 700, fontSize:"2.4rem", color: "#0f7699"}}> Serviços </Typography>
                 <Typography variant='body2' sx={{fontWeight: 400, fontSize:"1.2rem", pt:1, color: "#767676"}}>  
@@ -33,7 +34,11 @@ const Services: React.FC<Props> = ({ children, ...props }) => {
                 <SimulateNowSection></SimulateNowSection>
             </Grid>
 
-            
+
+            <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
+                <OurMapsSection></OurMapsSection>
+            </Grid>
+             
         </Grid>
     )
 }
