@@ -1,7 +1,14 @@
 # Projeto disponivel em: 
 
-- https://creditoja.pages.dev/
+O site https://creditoja.pages.dev/ é um excelente exemplo de um trabalho de desenvolvimento de website bem-sucedido. Como desenvolvedor, o trabalho realizado nesse projeto demonstra habilidades técnicas sólidas e um compromisso em fornecer uma experiência do usuário de qualidade.
 
+O site apresenta um design moderno e limpo, com cores vibrantes e imagens atraentes que se encaixam perfeitamente com o propósito do negócio. Além disso, a navegação é fácil e intuitiva, tornando a experiência do usuário agradável e sem esforço.
+
+Outro destaque é a implementação da funcionalidade de simulação de empréstimo, que permite ao usuário calcular diferentes opções de crédito, como valores e prazos, de forma rápida e simples. Além disso, o site é totalmente responsivo, o que significa que é facilmente acessível em dispositivos móveis.
+
+Em resumo, o site é um excelente exemplo de um trabalho de desenvolvimento de website bem-sucedido. O desenvolvedor realizou um trabalho de alta qualidade, fornecendo um site atraente, funcional e responsivo, que atende às necessidades do cliente e proporciona uma ótima experiência do usuário.
+
+Caso queira ver o projeto, voce pode acessar em:  https://creditoja.pages.dev/
 
 # Getting Started with Create React App
 
