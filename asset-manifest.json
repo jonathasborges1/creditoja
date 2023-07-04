@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/static/js/main.ec5dd19b.chunk.js",
-    "main.js.map": "/static/js/main.ec5dd19b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.701e7786.js",
-    "runtime-main.js.map": "/static/js/runtime-main.701e7786.js.map",
-    "static/js/2.2cdb3f53.chunk.js": "/static/js/2.2cdb3f53.chunk.js",
-    "static/js/2.2cdb3f53.chunk.js.map": "/static/js/2.2cdb3f53.chunk.js.map",
-    "static/js/3.dd37706e.chunk.js": "/static/js/3.dd37706e.chunk.js",
-    "static/js/3.dd37706e.chunk.js.map": "/static/js/3.dd37706e.chunk.js.map",
+    "main.js": "/static/js/main.d582b3d3.chunk.js",
+    "main.js.map": "/static/js/main.d582b3d3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e4a95aee.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e4a95aee.js.map",
+    "static/js/2.0a75bbe9.chunk.js": "/static/js/2.0a75bbe9.chunk.js",
+    "static/js/2.0a75bbe9.chunk.js.map": "/static/js/2.0a75bbe9.chunk.js.map",
+    "static/js/3.6f7b6a04.chunk.js": "/static/js/3.6f7b6a04.chunk.js",
+    "static/js/3.6f7b6a04.chunk.js.map": "/static/js/3.6f7b6a04.chunk.js.map",
     "index.html": "/index.html",
-    "static/js/2.2cdb3f53.chunk.js.LICENSE.txt": "/static/js/2.2cdb3f53.chunk.js.LICENSE.txt",
+    "static/js/2.0a75bbe9.chunk.js.LICENSE.txt": "/static/js/2.0a75bbe9.chunk.js.LICENSE.txt",
     "static/media/creditoja-banner.a223f3e4.jpg": "/static/media/creditoja-banner.a223f3e4.jpg",
     "static/media/creditoja-blog1.88ed2744.jpg": "/static/media/creditoja-blog1.88ed2744.jpg",
     "static/media/creditoja-blog2.7b35ee7b.jpg": "/static/media/creditoja-blog2.7b35ee7b.jpg",
@@ -17,8 +17,8 @@
     "static/media/folder.dde0900c.svg": "/static/media/folder.dde0900c.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.701e7786.js",
-    "static/js/2.2cdb3f53.chunk.js",
-    "static/js/main.ec5dd19b.chunk.js"
+    "static/js/runtime-main.e4a95aee.js",
+    "static/js/2.0a75bbe9.chunk.js",
+    "static/js/main.d582b3d3.chunk.js"
   ]
 }
