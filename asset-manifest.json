@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.js": "/static/js/main.be2664d0.chunk.js",
-    "main.js.map": "/static/js/main.be2664d0.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.dd4978ff.js",
-    "runtime-main.js.map": "/static/js/runtime-main.dd4978ff.js.map",
-    "static/js/2.5154c183.chunk.js": "/static/js/2.5154c183.chunk.js",
-    "static/js/2.5154c183.chunk.js.map": "/static/js/2.5154c183.chunk.js.map",
-    "static/js/3.eb955d3b.chunk.js": "/static/js/3.eb955d3b.chunk.js",
-    "static/js/3.eb955d3b.chunk.js.map": "/static/js/3.eb955d3b.chunk.js.map",
+    "main.js": "/static/js/main.ec5dd19b.chunk.js",
+    "main.js.map": "/static/js/main.ec5dd19b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.701e7786.js",
+    "runtime-main.js.map": "/static/js/runtime-main.701e7786.js.map",
+    "static/js/2.2cdb3f53.chunk.js": "/static/js/2.2cdb3f53.chunk.js",
+    "static/js/2.2cdb3f53.chunk.js.map": "/static/js/2.2cdb3f53.chunk.js.map",
+    "static/js/3.dd37706e.chunk.js": "/static/js/3.dd37706e.chunk.js",
+    "static/js/3.dd37706e.chunk.js.map": "/static/js/3.dd37706e.chunk.js.map",
     "index.html": "/index.html",
-    "static/js/2.5154c183.chunk.js.LICENSE.txt": "/static/js/2.5154c183.chunk.js.LICENSE.txt",
+    "static/js/2.2cdb3f53.chunk.js.LICENSE.txt": "/static/js/2.2cdb3f53.chunk.js.LICENSE.txt",
     "static/media/creditoja-banner.a223f3e4.jpg": "/static/media/creditoja-banner.a223f3e4.jpg",
     "static/media/creditoja-blog1.88ed2744.jpg": "/static/media/creditoja-blog1.88ed2744.jpg",
     "static/media/creditoja-blog2.7b35ee7b.jpg": "/static/media/creditoja-blog2.7b35ee7b.jpg",
-    "static/media/creditoja-logotipo.0c60bafb.jpg": "/static/media/creditoja-logotipo.0c60bafb.jpg"
+    "static/media/creditoja-logotipo.0c60bafb.jpg": "/static/media/creditoja-logotipo.0c60bafb.jpg",
+    "static/media/folder.dde0900c.svg": "/static/media/folder.dde0900c.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.dd4978ff.js",
-    "static/js/2.5154c183.chunk.js",
-    "static/js/main.be2664d0.chunk.js"
+    "static/js/runtime-main.701e7786.js",
+    "static/js/2.2cdb3f53.chunk.js",
+    "static/js/main.ec5dd19b.chunk.js"
   ]
 }
