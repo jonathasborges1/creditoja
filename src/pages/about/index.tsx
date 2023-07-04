@@ -11,7 +11,7 @@ import { mdiStarCircleOutline } from '@mdi/js';
 import { mdiAccountGroupOutline } from '@mdi/js';
 
 interface Props {
-    children?: React.ReactNode;
+    children?: React.ReactNode; 
 }
 
 const About: React.FC<Props> = ({ children, ...props }) => {

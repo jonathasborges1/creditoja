@@ -1,10 +1,11 @@
-import React from 'react';
 import * as yup from "yup";
 import axios from 'axios';
 import { Form, Formik } from "formik";
+import React, { useState } from 'react';
 import { useSnackbar } from "notistack";
 
-import { Box, Button } from '@mui/material';
+import { Box, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import TextFieldPhone from '@components/textFieldPhone';
 import TextFieldCurrency from '@components/textFieldCurrency';
@@ -13,6 +14,8 @@ import TextFieldCustom from '@components/textFieldCustom';
 import { phoneNumberMask } from '@utils/index';
 import appConfig from '@config/appConfig';
 
+import CircularStatic from "@components/circularProgressWithLabel";
+import DragInDropBox from "@components/dragInDropBox";
 
 interface Props {
    children?: React.ReactNode;
@@ -28,6 +31,7 @@ interface InitialValuesFormik {
    propertyValue: string; // Valor do Imovel
    loanAmount: string; // Valor do emprestimo
    tag: string;
+   file: File | null; // Arquivo enviado
 }
 
 const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
@@ -43,6 +47,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       propertyValue: '',
       loanAmount: '',
       tag: "#finanzero",
+      file: null,
    }
 
    const validationSchema = yup.object().shape({
@@ -56,7 +61,8 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
         .max(50, "Nome muito longo!")
         .required("Este campo é obrigatório"),
       phone: yup.string().matches(/\(\d{2}\) \d{4,5}\-\d{4}|^\d{10,11}/g,"Insira um telefone válido! - Exemplo: +55 (92) 9 8829-0290").required("Este campo é obrigatório"),
-    });
+      file: yup.mixed().required('Por favor, selecione um arquivo .zip'), 
+   });
 
     const emailBody = (valuesFormik: InitialValuesFormik | undefined): string => {
       return `
@@ -72,14 +78,18 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   <li>Valor Estimado: ${valuesFormik?.valued}</li>
                   <li>CEP: ${valuesFormik?.cep}</li>
                   <li>Imovel esta quitado: ${valuesFormik?.propertyPaid}</li>
-                  <li>Valor do Imovelo: ${valuesFormik?.propertyValue}</li>
+                  <li>Valor do Imovel: ${valuesFormik?.propertyValue}</li>
                   <li>Valor do emprestimo: ${valuesFormik?.loanAmount}</li>
                   <li>Tag: ${valuesFormik?.tag}</li>
                </ul>
+               <p>Arquivo anexado: ${valuesFormik?.file?.name || 'Nenhum arquivo enviado'}</p>
             </body>
          </html>
       `;
     }
+    
+    const [fileData, setFileData] = useState<string | null | ArrayBuffer >(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
    return (
       <Formik
@@ -96,8 +106,10 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                propertyValue: values.propertyValue,
                loanAmount: values.loanAmount,
                tag: values.tag,
+               file: values.file,
             }
-
+            setLoading(true);
+            
             try {
                const params = {
                   sender: {
@@ -113,13 +125,19 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   }],
                   subject: "Sistema de Notificação de Email CreditoJa - Lead Indicado pela Finanzero",
                   htmlContent: emailBody(payloadValuesFormik),
+                  attachment: [
+                     {
+                        content: fileData || '', // Tipo do arquivo
+                        name: payloadValuesFormik.file?.name || '', // Nome do arquivo
+                     }
+                  ],
                }
 
                const header = {
                   headers : {
                      "api-key": appConfig.api.key,
                      'Content-Type': 'application/json',
-                     Accept: 'application/json',
+                     'Accept': 'application/json',
                   }
                }
 
@@ -139,6 +157,8 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                enqueueSnackbar("Ocorreu um erro ao Enviar Seus Dados", {
                   variant: "error",
                 });
+            }finally{
+               setLoading(false);
             }
             
             actions.resetForm(); // Limpa campos do formulario
@@ -160,7 +180,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.name &&
                         Boolean(formikprops.errors.name)
                       }
-                     required
+                     // required
                   />
                   <TextFieldCustom
                      type={"email"}
@@ -174,7 +194,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.email &&
                         Boolean(formikprops.errors.email)
                       }
-                     required
+                     // required
                   />
                   <TextFieldPhone
                      type={"text"}
@@ -188,7 +208,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.phone &&
                         Boolean(formikprops.errors.phone)
                       }
-                     required
+                     // required
                   />
                   <TextFieldCurrency
                      type={"text"}
@@ -201,7 +221,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.valued &&
                         Boolean(formikprops.errors.valued)
                       }
-                     required
+                     // required
                   />
                   <TextFieldCustom
                      type={"text"}
@@ -215,7 +235,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.cep &&
                         Boolean(formikprops.errors.cep)
                       }
-                     required
+                     // required
                   />
                   <TextFieldCustom
                      type={"text"}
@@ -229,7 +249,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.propertyPaid &&
                         Boolean(formikprops.errors.propertyPaid)
                       }
-                     required
+                     // required
                   />
                   <TextFieldCurrency
                      type={"text"}
@@ -243,7 +263,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.propertyValue &&
                         Boolean(formikprops.errors.propertyValue)
                       }
-                     required
+                     // required
                   />
                   <TextFieldCurrency
                      type={"text"}
@@ -257,10 +277,84 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.loanAmount &&
                         Boolean(formikprops.errors.loanAmount)
                       }
-                     required
+                     // required
                   />
+                  <Box>
+                     <Typography>Por favor, separe os documentos abaixo solicitados em um .zip e submeta os arquivos no <b style={{color:"red"}}>formato .zip</b> </Typography>
+                        <List>
+                           <ListItem>
+                           <ArrowRightIcon />
+                              <ListItemText primary="Documento de Identidade: RG e CPF, ou CNH" />
+                           </ListItem>
+                           <ListItem>
+                              <ArrowRightIcon />
+                              <ListItemText primary="Comprovante de estado civil" />
+                           </ListItem>
+                           <ListItem>
+                              <ArrowRightIcon />
+                              <ListItemText primary="Comprovante de endereço" />
+                           </ListItem>
+                           <ListItem>
+                              <ArrowRightIcon />
+                              <ListItemText primary="Matrícula do imóvel" />
+                           </ListItem>
+                           <ListItem>
+                              <ArrowRightIcon />
+                              <ListItemText primary="IPTU" />
+                           </ListItem>
+                           <ListItem>
+                              <ArrowRightIcon />
+                              <ListItemText primary="Fotos do imóvel" />
+                           </ListItem>
+                        </List>
+                        <Typography sx={{opacity:0.7, fontSize: "0.6rem"}}> <b style={{color:"red"}}>Aviso:</b> O seu arquivo .zip nao pode passar de 10mb </Typography>
+                     </Box>
+                     
+                     <DragInDropBox
+                        error={  Boolean(formikprops.touched.file) && Boolean(formikprops.errors.file) }
+                        touched={Boolean(formikprops.touched.file)}
+                        helperText={
+                           formikprops.touched.file && formikprops.errors.file ? String(formikprops.errors.file): ""
+                        }
+                        onTouch={() => {
+                          console.log("touch");
+                          formikprops.setFieldTouched("file", true);
+                        }}
+                        onChange={(file: File) => {
+                           // const file = (event.target as HTMLInputElement).files?.[0]; // Obter o primeiro arquivo selecionado
+                           // Verificar o tamanho do arquivo
+                           const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB (altere conforme necessário)
+                           if (file && file.size > maxSizeInBytes) {
+                              formikprops.setFieldError("file", "O tamanho do arquivo excede o limite 10mb permitido.");
+                           } else {
+                              formikprops.setFieldValue("file", file);
+                           }
+                           
+                           if (file) {
+                              const reader = new FileReader();
+                              reader.readAsDataURL(file);
+   
+                              reader.onload  = () => {
+                              const result = reader.result;
+                              if (typeof result === 'string') {
+                                 const base64Data = result.split(',')[1];
+                                 setFileData(base64Data);
+                               }
+                              };
+                            
+                              reader.readAsDataURL(file);
+                            } else {
+                              setFileData(null);
+                            }
+   
+                        }}
+                        value={formikprops.values.file}
+                      />
+
                   <Box sx={{border: "0px solid purple", display: "flex", justifyContent:"left"}}>
-                     <Button
+                     {loading ? 
+                        <CircularStatic  />: 
+                        <Button
                         type={"submit"}
                         variant={"contained"}
                         sx={{
@@ -271,6 +365,8 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                      >
                         Enviar
                      </Button>
+                     }
+
                   </Box>
 
                </Form>

@@ -6,7 +6,8 @@ const appConfig =  {
       url: "https://creditoja.net/",
    },
    api: {
-      url: "https://api.sendinblue.com/v3/smtp/email",
+      url: "https://api.brevo.com/v3/smtp/email",
+      urlOld: "https://api.sendinblue.com/v3/smtp/email",
       key: process.env.REACT_APP_API_KEY,
    },
    user: {
