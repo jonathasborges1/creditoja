@@ -31,7 +31,7 @@ interface InitialValuesFormik {
    propertyValue: string; // Valor do Imovel
    loanAmount: string; // Valor do emprestimo
    tag: string;
-   file: File | null; // Arquivo enviado
+   file: (File[] | null) ; // Arquivo enviado
 }
 
 const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
@@ -47,7 +47,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       propertyValue: '',
       loanAmount: '',
       tag: "#finanzero",
-      file: null,
+      file: [],
    }
 
    const validationSchema = yup.object().shape({
@@ -61,10 +61,22 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
         .max(50, "Nome muito longo!")
         .required("Este campo é obrigatório"),
       phone: yup.string().matches(/\(\d{2}\) \d{4,5}\-\d{4}|^\d{10,11}/g,"Insira um telefone válido! - Exemplo: +55 (92) 9 8829-0290").required("Este campo é obrigatório"),
-      file: yup.mixed().required('Por favor, selecione um arquivo .zip'), 
+      file: yup
+      .mixed()
+      .test("fileRequired", "Por favor, selecione um arquivo", function (value) {
+        return value && (value as File[]).length > 0;
+      })
+      .required("Por favor, selecione um arquivo"),
    });
 
     const emailBody = (valuesFormik: InitialValuesFormik | undefined): string => {
+      
+      let fileNames = "Nenhum arquivo enviado";
+
+      if (valuesFormik?.file && valuesFormik.file.length > 0) {
+        fileNames = Array.from(valuesFormik.file).map((file: File) => file.name).join(", ");
+      }
+
       return `
          <html>
             <head></head>
@@ -82,13 +94,14 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   <li>Valor do emprestimo: ${valuesFormik?.loanAmount}</li>
                   <li>Tag: ${valuesFormik?.tag}</li>
                </ul>
-               <p>Arquivo anexado: ${valuesFormik?.file?.name || 'Nenhum arquivo enviado'}</p>
+               <p>Arquivo anexado: ${fileNames}</p>
             </body>
          </html>
       `;
     }
     
-    const [fileData, setFileData] = useState<string | null | ArrayBuffer >(null);
+    const [fileData, setFileData] = useState<(string | null | ArrayBuffer)[]>([]);
+    const [uploadProgress, setUploadProgress] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
 
    return (
@@ -109,7 +122,14 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                file: values.file,
             }
             setLoading(true);
-            
+
+            const attachmentList = fileData && fileData.map((file,index) => {
+               return {
+                  content: file || '', // Tipo do arquivo
+                  name: payloadValuesFormik && payloadValuesFormik.file ? payloadValuesFormik.file[index]?.name : '', // Nome do arquivo
+               }
+            })
+
             try {
                const params = {
                   sender: {
@@ -125,12 +145,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   }],
                   subject: "Sistema de Notificação de Email CreditoJa - Lead Indicado pela Finanzero",
                   htmlContent: emailBody(payloadValuesFormik),
-                  attachment: [
-                     {
-                        content: fileData || '', // Tipo do arquivo
-                        name: payloadValuesFormik.file?.name || '', // Nome do arquivo
-                     }
-                  ],
+                  attachment: attachmentList
                }
 
                const header = {
@@ -158,6 +173,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   variant: "error",
                 });
             }finally{
+               setUploadProgress(0); // Limpa o progresso do upload
                setLoading(false);
             }
             
@@ -320,35 +336,51 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                           console.log("touch");
                           formikprops.setFieldTouched("file", true);
                         }}
-                        onChange={(file: File) => {
-                           // const file = (event.target as HTMLInputElement).files?.[0]; // Obter o primeiro arquivo selecionado
-                           // Verificar o tamanho do arquivo
+                        onChange={async(files: File[]) => {
+                           const totalFiles = files.length;
+                           let uploadedFiles = 0;
+
                            const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB (altere conforme necessário)
-                           if (file && file.size > maxSizeInBytes) {
-                              formikprops.setFieldError("file", "O tamanho do arquivo excede o limite 10mb permitido.");
-                           } else {
-                              formikprops.setFieldValue("file", file);
+                           const newFiles: File[] = [];
+
+                           for (const file of files) {
+                              if (file.size > maxSizeInBytes) {
+                                 formikprops.setFieldError("file", "O tamanho do arquivo excede o limite de 10 MB permitido.");
+                              } else {
+                                 newFiles.push(file);
+                              }
                            }
-                           
-                           if (file) {
+
+                           const processedFiles: (string | null | ArrayBuffer)[] = [];
+
+                           for (const file of newFiles) {
                               const reader = new FileReader();
+
+                              const filePromise = new Promise<string | null | ArrayBuffer>((resolve) => {
+                                 reader.onload = () => {
+                                 const result = reader.result;
+                                 if (typeof result === "string") {
+                                    const base64Data = result.split(",")[1];
+                                    resolve(base64Data);
+                                 } else {
+                                    resolve(result);
+                                 }
+                                 };
+                              });
+
                               reader.readAsDataURL(file);
-   
-                              reader.onload  = () => {
-                              const result = reader.result;
-                              if (typeof result === 'string') {
-                                 const base64Data = result.split(',')[1];
-                                 setFileData(base64Data);
-                               }
-                              };
-                            
-                              reader.readAsDataURL(file);
-                            } else {
-                              setFileData(null);
-                            }
-   
+
+                              processedFiles.push(await filePromise);
+
+                              uploadedFiles++;
+                              const progress = Math.round((uploadedFiles / totalFiles) * 100);
+                              setUploadProgress(progress);
+                           }
+
+                           setFileData(processedFiles);
+                           formikprops.setFieldValue("file", newFiles);
                         }}
-                        value={formikprops.values.file}
+                        value={formikprops?.values?.file?.length ? formikprops.values.file : null}
                       />
 
                   <Box sx={{border: "0px solid purple", display: "flex", justifyContent:"left"}}>
@@ -362,6 +394,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                            background: "#149dcc", color: "#fff", padding: 1, pl: 4, pr: 4, fontSize: "1rem", 
                            "&:hover": {backgroundColor: '#90ee90', color: '#000'}
                         }}
+                        // disabled={uploadProgress < 100 || loading}
                      >
                         Enviar
                      </Button>

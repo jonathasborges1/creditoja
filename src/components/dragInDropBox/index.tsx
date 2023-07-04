@@ -1,20 +1,8 @@
-// import {
-//    Avatar,
-//    Button,
-//    Collapse,
-//    createStyles,
-//    Divider,
-//    FormHelperText,
-//    makeStyles,
-//    Typography,
-//  } from "@material-ui/core";
+import clsx from "clsx";
+import React, { useState } from "react";
 
-
- import clsx from "clsx";
- import React, { useState } from "react";
-
- import { ReactComponent as FolderIcon } from "../../assets/folder.svg";
- import notFileImg from "../../assets/nao-compativel.png";
+import { ReactComponent as FolderIcon } from "../../assets/folder.svg";
+import notFileImg from "../../assets/nao-compativel.png";
 
 import { Avatar, Button, Collapse, Divider, FormHelperText, Theme, Typography } from "@mui/material";
 
@@ -22,6 +10,7 @@ import { makeStyles, createStyles } from '@mui/styles';
 
  import FileCopyIcon from '@mui/icons-material/FileCopy';
  import BackupIcon from '@mui/icons-material/Backup';
+ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
  const useStyles = makeStyles((theme: Theme) =>
    createStyles({
@@ -110,12 +99,12 @@ import { makeStyles, createStyles } from '@mui/styles';
  );
  
  interface Props {
-   onChange(file: File): void;
+   onChange(file: File[]): void;
    onTouch(): void;
    touched: boolean;
    error: boolean;
    helperText: string;
-   value: File | null;
+   value: File[] | null;
  }
  
  const DragInDropBox: React.FC<Props> = ({
@@ -142,6 +131,13 @@ import { makeStyles, createStyles } from '@mui/styles';
      e.stopPropagation();
      setIsDragging(false);
    };
+
+   const handleDeleteFile = (index: number) => {
+      if (value) {
+         const updatedFiles = value.filter((_, i) => i !== index);
+         onChange(updatedFiles);
+       }
+    };
  
    return (
      <>
@@ -151,9 +147,10 @@ import { makeStyles, createStyles } from '@mui/styles';
          }}
          onDragLeave={handleDragOut}
          onDrop={(e) => {
-           e.preventDefault();
-           onChange(e.dataTransfer.files[0]);
-           setIsDragging(false);
+            e.preventDefault();
+            const files = Array.from(e.dataTransfer.files); // Use Array.from para converter FileList em um array de File
+            onChange(files);
+            setIsDragging(false);
          }}
          className={clsx(classes.boxUpload, {
            [classes.boxUploadInvalidFile]: error,
@@ -164,9 +161,10 @@ import { makeStyles, createStyles } from '@mui/styles';
            id="file"
            name="file"
            type="file"
+           multiple  // Adicione essa propriedade
            onChange={(e) => {
-             if (e.target.files?.length) {
-               onChange(e.target.files[0]);
+            if (e.target.files?.length) {
+               onChange(Array.from(e.target.files)); // Use Array.from para converter FileList em um array de File
              }
              setTimeout(() => {
                onTouch();
@@ -185,7 +183,29 @@ import { makeStyles, createStyles } from '@mui/styles';
                      <FolderIcon />
                    </Avatar>
                  )}
-                 <Typography>{value && value.name}</Typography>
+                 {value.map( (file,index) => {
+                     return(
+                        <div key={index} 
+                           style={{
+                              display:"flex",
+                              width: "60%",
+                              justifyContent: "space-evenly",
+                              alignItems: "center",
+                              marginBottom: "0.6rem",
+                        }}>
+                           <Typography>{file?.name}</Typography>
+                           <Button
+                                 variant="outlined"
+                                 color="secondary"
+                                 onClick={() => handleDeleteFile(index)}
+                                 startIcon={<HighlightOffIcon />}
+                                 >
+                                 Excluir
+                            </Button>
+                        </div>
+                     )
+                 })}
+                 
                  <Divider className={classes.divider} />
                </>
              )}

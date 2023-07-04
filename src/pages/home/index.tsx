@@ -7,8 +7,6 @@ import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import TouchAppOutlinedIcon from '@mui/icons-material/TouchAppOutlined';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-
 
 import { mdiInstagram } from '@mdi/js';
 import { mdiFacebook } from '@mdi/js';
@@ -49,9 +47,9 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
     }, []);
 
 
-    const handleRedirectForm = () => {
-        history.push(ROUTES.CONTACT);
-    }
+    // const handleRedirectForm = () => {
+    //     history.push(ROUTES.CONTACT);
+    // }
 
     const handleRedirectService = () => {
         history.push(ROUTES.SERVICES);
