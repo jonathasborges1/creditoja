@@ -26,7 +26,7 @@ interface InitialValuesFormik {
    name: string;
    email: string;
    phone: string;
-   valued: string; // Valor Estimado
+   // valued: string; // Valor Estimado
    cep: string;
    propertyPaid: string // Imovel esta quitado ?
    propertyValue: string; // Valor do Imovel
@@ -51,7 +51,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       name: '',
       email: '',
       phone: '',
-      valued: '',
+      // valued: '',
       cep: '',
       propertyPaid: '',
       propertyValue: '',
@@ -106,7 +106,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   <li>Nome: ${valuesFormik?.name}</li>
                   <li>Email: ${valuesFormik?.email}</li>
                   <li>Telefone: ${phoneNumberMask(valuesFormik?.phone)}</li>
-                  <li>Valor Estimado: ${valuesFormik?.valued}</li>
+
                   <li>CEP: ${valuesFormik?.cep}</li>
                   <li>Imovel esta quitado: ${valuesFormik?.propertyPaid}</li>
                   <li>Valor do Imovel: ${valuesFormik?.propertyValue}</li>
@@ -141,7 +141,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                name: values.name,
                email: values.email,
                phone: values.phone,
-               valued: values.valued,
+               // valued: values.valued,
                cep: values.cep,
                propertyPaid: values.propertyPaid,
                propertyValue: values.propertyValue,
@@ -263,7 +263,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                       }
                      // required
                   />
-                  <TextFieldCurrency
+                  {/* <TextFieldCurrency
                      type={"text"}
                      name={"valued"}
                      label={"Valor Pretendido"}
@@ -275,7 +275,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         Boolean(formikprops.errors.valued)
                       }
                      // required
-                  />
+                  /> */}
                   <TextFieldCustomNumber
                      type={"text"}
                      name={"cep"}
