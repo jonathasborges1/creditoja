@@ -16,6 +16,7 @@ import appConfig from '@config/appConfig';
 
 import CircularStatic from "@components/circularProgressWithLabel";
 import DragInDropBox from "@components/dragInDropBox";
+import TextFieldCustomNumber from "@components/textFieldCustomNumber";
 
 interface Props {
    children?: React.ReactNode;
@@ -30,6 +31,15 @@ interface InitialValuesFormik {
    propertyPaid: string // Imovel esta quitado ?
    propertyValue: string; // Valor do Imovel
    loanAmount: string; // Valor do emprestimo
+   totalIncome: string; // Renda total Informada
+   occupation: string; // Ocupacao
+   civilStatus: string; // Estado Civil
+   loanMotivation: string; // Motivacao do emprestimo
+   useOfTheProperty: string; // Utilização do Imóvel
+   creditAmount: string; // Valor do Crédito
+   termPeriod: string; // Período do Prazo / Prazo do emprestimo
+   hasDebitBalance: string; // Existe saldo devedor no imóvel
+   propertyRegistered : string; // O imóvel está registrado?
    tag: string;
    file: (File[] | null) ; // Arquivo enviado
 }
@@ -46,6 +56,15 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       propertyPaid: '',
       propertyValue: '',
       loanAmount: '',
+      totalIncome:'',
+      occupation: '',
+      civilStatus: '',
+      loanMotivation: '',
+      useOfTheProperty: '',
+      creditAmount: '',
+      termPeriod: '',
+      hasDebitBalance: '',
+      propertyRegistered: '',
       tag: "#finanzero",
       file: [],
    }
@@ -92,6 +111,15 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   <li>Imovel esta quitado: ${valuesFormik?.propertyPaid}</li>
                   <li>Valor do Imovel: ${valuesFormik?.propertyValue}</li>
                   <li>Valor do emprestimo: ${valuesFormik?.loanAmount}</li>
+                  <li>Renda Total Informada: ${valuesFormik?.totalIncome}</li>
+                  <li>Profissão: ${valuesFormik?.occupation}</li>
+                  <li>Estado Civil: ${valuesFormik?.civilStatus}</li>
+                  <li>Motivação do emprestimo: ${valuesFormik?.loanMotivation}</li>
+                  <li>Utilização do Imóvel: ${valuesFormik?.useOfTheProperty}</li>
+                  <li>Valor do Crédito: ${valuesFormik?.creditAmount}</li>
+                  <li>Prazo: ${valuesFormik?.termPeriod}</li>
+                  <li>Existe saldo devedor no imóvel: ${valuesFormik?.hasDebitBalance}</li>
+                  <li>O imóvel está averbado?: ${valuesFormik?.propertyRegistered}</li>
                   <li>Tag: ${valuesFormik?.tag}</li>
                </ul>
                <p>Arquivo anexado: ${fileNames}</p>
@@ -118,6 +146,15 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                propertyPaid: values.propertyPaid,
                propertyValue: values.propertyValue,
                loanAmount: values.loanAmount,
+               totalIncome: values.totalIncome,
+               occupation: values.occupation,
+               civilStatus: values.civilStatus,
+               loanMotivation: values.loanMotivation,
+               useOfTheProperty: values.useOfTheProperty,
+               creditAmount: values.creditAmount,
+               termPeriod: values.termPeriod,
+               hasDebitBalance: values.hasDebitBalance,
+               propertyRegistered: values.propertyRegistered,
                tag: values.tag,
                file: values.file,
             }
@@ -239,10 +276,11 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                       }
                      // required
                   />
-                  <TextFieldCustom
+                  <TextFieldCustomNumber
                      type={"text"}
                      name={"cep"}
                      label={"Cep"}
+                     maxLength={8}
                      value={formikprops.values.cep}
                      onChange={formikprops.handleChange}
                      onBlur={formikprops.handleBlur}
@@ -295,6 +333,126 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                       }
                      // required
                   />
+                  <TextFieldCurrency
+                     type={"text"}
+                     name={"totalIncome"}
+                     label={"Renda total Informada"}
+                     value={formikprops.values.totalIncome}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.totalIncome && formikprops.errors.totalIncome}
+                     error={
+                        formikprops.touched.totalIncome &&
+                        Boolean(formikprops.errors.totalIncome)
+                      }
+                     // required
+                  />
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"occupation"}
+                     label={"Profissão"}
+                     value={formikprops.values.occupation}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.occupation && formikprops.errors.occupation}
+                     error={
+                        formikprops.touched.occupation &&
+                        Boolean(formikprops.errors.occupation)
+                      }
+                     // required
+                  />
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"civilStatus"}
+                     label={"Estado Civil"}
+                     value={formikprops.values.civilStatus}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.civilStatus && formikprops.errors.civilStatus}
+                     error={
+                        formikprops.touched.civilStatus &&
+                        Boolean(formikprops.errors.civilStatus)
+                      }
+                     // required
+                  />
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"loanMotivation"}
+                     label={"Motivação do emprestimo"}
+                     value={formikprops.values.loanMotivation}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.loanMotivation && formikprops.errors.loanMotivation}
+                     error={
+                        formikprops.touched.loanMotivation &&
+                        Boolean(formikprops.errors.loanMotivation)
+                      }
+                  />
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"useOfTheProperty"}
+                     label={"Utilização do Imóvel"}
+                     value={formikprops.values.useOfTheProperty}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.useOfTheProperty && formikprops.errors.useOfTheProperty}
+                     error={
+                        formikprops.touched.useOfTheProperty &&
+                        Boolean(formikprops.errors.useOfTheProperty)
+                      }
+                  />
+                  <TextFieldCurrency
+                     type={"text"}
+                     name={"creditAmount"}
+                     label={"Valor do Crédito"}
+                     value={formikprops.values.creditAmount}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.creditAmount && formikprops.errors.creditAmount}
+                     error={
+                        formikprops.touched.creditAmount &&
+                        Boolean(formikprops.errors.creditAmount)
+                      }
+                  />  
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"termPeriod"}
+                     label={"Prazo do emprestimo"}
+                     value={formikprops.values.termPeriod}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.termPeriod && formikprops.errors.termPeriod}
+                     error={
+                        formikprops.touched.termPeriod &&
+                        Boolean(formikprops.errors.termPeriod)
+                      }
+                  /> 
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"hasDebitBalance"}
+                     label={"Existe saldo devedor no imóvel"}
+                     value={formikprops.values.hasDebitBalance}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.hasDebitBalance && formikprops.errors.hasDebitBalance}
+                     error={
+                        formikprops.touched.hasDebitBalance &&
+                        Boolean(formikprops.errors.hasDebitBalance)
+                      }
+                  /> 
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"propertyRegistered"}
+                     label={"O imóvel está averbado?"}
+                     value={formikprops.values.propertyRegistered}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.propertyRegistered && formikprops.errors.propertyRegistered}
+                     error={
+                        formikprops.touched.propertyRegistered &&
+                        Boolean(formikprops.errors.propertyRegistered)
+                      }
+                  /> 
                   <Box>
                      <Typography>Por favor, separe os documentos abaixo solicitados em um .zip e submeta os arquivos no <b style={{color:"red"}}>formato .zip</b> </Typography>
                         <List>
@@ -320,7 +478,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                            </ListItem>
                            <ListItem>
                               <ArrowRightIcon />
-                              <ListItemText primary="Fotos do imóvel" />
+                              <ListItemText primary="Fotos do imóvel - (no minimo 4 fotos)" />
                            </ListItem>
                         </List>
                         <Typography sx={{opacity:0.7, fontSize: "0.6rem"}}> <b style={{color:"red"}}>Aviso:</b> O seu arquivo .zip nao pode passar de 10mb </Typography>
