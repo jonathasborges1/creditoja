@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/creditoja/static/js/main.e75153c1.chunk.js",
-    "main.js.map": "/creditoja/static/js/main.e75153c1.chunk.js.map",
+    "main.js": "/creditoja/static/js/main.f3711c9e.chunk.js",
+    "main.js.map": "/creditoja/static/js/main.f3711c9e.chunk.js.map",
     "runtime-main.js": "/creditoja/static/js/runtime-main.68b50ff8.js",
     "runtime-main.js.map": "/creditoja/static/js/runtime-main.68b50ff8.js.map",
     "static/js/2.a81ec5d8.chunk.js": "/creditoja/static/js/2.a81ec5d8.chunk.js",
@@ -19,6 +19,6 @@
   "entrypoints": [
     "static/js/runtime-main.68b50ff8.js",
     "static/js/2.a81ec5d8.chunk.js",
-    "static/js/main.e75153c1.chunk.js"
+    "static/js/main.f3711c9e.chunk.js"
   ]
 }
