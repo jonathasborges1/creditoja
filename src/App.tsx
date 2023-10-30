@@ -1,5 +1,4 @@
 import React from 'react';
-// import './App.css';
 
 import { CssBaseline, IconButton } from '@mui/material';
 import { ThemeProvider  } from '@mui/material/styles';
@@ -34,7 +33,7 @@ const App: React.FC = () => {
               )}
         >
         <CssBaseline/> 
-          {/* App running... */}
+
         <Routes></Routes>
         </SnackbarProvider>
       </ThemeProviderLegacy>

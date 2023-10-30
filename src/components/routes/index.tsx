@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, HashRouter } from 'react-router-dom';
 
 import ROUTES from "@config/routes";
 import About from "@pages/about";
@@ -10,15 +10,15 @@ import Services from "@pages/services";
 
 const Routes: React.FC = ({ ...props}) => {
     return(
-        <BrowserRouter> 
+        <HashRouter> 
             <Switch>
-                <Route exact path="*" component={Home}/>
                 <Route exact path={ROUTES.HOME} component={Home}/>
                 <Route path={ROUTES.ABOUT} component={About} />
                 <Route path={ROUTES.SERVICES} component={Services} />
                 <Route path={ROUTES.CONTACT} component={Contact} />
+                <Route exact path="*" component={Home}/>
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 

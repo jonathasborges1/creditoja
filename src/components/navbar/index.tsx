@@ -96,14 +96,33 @@ const NavBar: React.FC<Props> = ({ children, ...props }) => {
       <Box> 
          <MenuIcon onClick={handleToggle} sx={{fontSize: "2.5rem"}} />
          <Drawer anchor="top" open={open} onClose={handleToggle}>
-           <List>
+           {/* <List>
              {menuItem.map((item,index) => (
-               <ListItem button onClick={handleToggle} component={Link} href={item.href} key={index}> 
-                 {/* <ListItemIcon>{item.icon}</ListItemIcon> */}
+               <ListItemButton onClick={handleToggle} component={Link} href={item.href} key={index}> 
                  <ListItemText primary={item.label} />
-               </ListItem>
+               </ListItemButton>
              ))}
-           </List>
+           </List> */}
+
+            <List component={"nav"} style={{border:"0px solid red"}} >
+                  <ListItemButton sx={{p:1}} onClick={handleRedirectHome}>Home</ListItemButton>
+                  <ListItemButton sx={{p:1}} onClick={handleRedirectService} >Serviços</ListItemButton>
+                  <ListItemButton sx={{p:1,mr:0.5}} onClick={handleRedirectAbout} >Sobre Nós</ListItemButton>
+                  <ListItemButton onClick={handleRedirectContact}
+                     sx={{
+                        p:1, pl:3, paddingRight:3, 
+                        border: "0px solid red", borderRadius: 10, 
+                        backgroundColor: "#149dcc", color: "#fff", "&:hover": {backgroundColor: '#000', color: '#149dcc'}
+                     }} 
+                  >
+                     <TouchApp 
+                        className={classes.touchApp}
+                        sx={{  fontSize: 20, marginRight: 1, }} 
+                     />
+                     SIMULE AGORA
+                  </ListItemButton>
+            
+            </List>
          </Drawer>
        </Box>
       )
