@@ -12,6 +12,7 @@ const Routes: React.FC = ({ ...props}) => {
     return(
         <BrowserRouter> 
             <Switch>
+                <Route exact path="*" component={Home}/>
                 <Route exact path={ROUTES.HOME} component={Home}/>
                 <Route path={ROUTES.ABOUT} component={About} />
                 <Route path={ROUTES.SERVICES} component={Services} />
