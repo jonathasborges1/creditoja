@@ -19,10 +19,15 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
-      - name: Build
-        run: npm run build
+      - name: 🔨 Build application
+        env:
+          NODE_ENV: production
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+        run: |
+          echo "export REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> $GITHUB_ENV
+          npm run build
 
       - name: Deploy to GitHub Pages
         env:
