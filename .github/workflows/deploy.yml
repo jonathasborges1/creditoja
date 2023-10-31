@@ -29,6 +29,10 @@ jobs:
           git config --global user.email "jbc@icomp.ufam.edu.br"
           git config --global user.name "jonathasborges1"
 
+      - name: Set Git remote URL with credentials
+        run: |
+          git config remote.origin.url "https://${{ secrets.TOKEN_GITHUB }}@github.com/${{ github.repository }}"
+
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
