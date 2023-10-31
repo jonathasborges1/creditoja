@@ -41,4 +41,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install -g gh-pages
-          gh-pages -d build -b gh-pages -u "GitHub <jonathasborges0@gmail.com>"
+          gh-pages -d build
