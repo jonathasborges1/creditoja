@@ -1,6 +1,6 @@
 # Projeto disponivel em: 
 
-O site https://creditoja.pages.dev/ é um excelente exemplo de um trabalho de desenvolvimento de website bem-sucedido. Como desenvolvedor, o trabalho realizado nesse projeto demonstra habilidades técnicas sólidas e um compromisso em fornecer uma experiência do usuário de qualidade.
+O site https://creditoja.pages.dev/ ou https://jonathasborges1.github.io/creditoja/ é um excelente exemplo de um trabalho de desenvolvimento de website bem-sucedido. Como desenvolvedor, o trabalho realizado nesse projeto demonstra habilidades técnicas sólidas e um compromisso em fornecer uma experiência do usuário de qualidade.
 
 O site apresenta um design moderno e limpo, com cores vibrantes e imagens atraentes que se encaixam perfeitamente com o propósito do negócio. Além disso, a navegação é fácil e intuitiva, tornando a experiência do usuário agradável e sem esforço.
 
