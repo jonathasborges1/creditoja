@@ -24,6 +24,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install git
 
+      - name: Configure Git author identity
+        run: |
+          git config --global user.email "jbc@icomp.ufam.edu.br"
+          git config --global user.name "jonathasborges1"
+
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
@@ -38,7 +43,6 @@ jobs:
       - name: Deploy to GitHub Pages
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           npm install -g gh-pages
           gh-pages -d build
