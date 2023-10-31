@@ -17,6 +17,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
+      
+      - name: Update Git
+        run: |
+          sudo add-apt-repository -y ppa:git-core/ppa
+          sudo apt-get update
+          sudo apt-get install git
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
@@ -32,6 +38,7 @@ jobs:
       - name: Deploy to GitHub Pages
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install -g gh-pages
           gh-pages -d build -b gh-pages -u "GitHub <jonathasborges0@gmail.com>"
