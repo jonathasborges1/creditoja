@@ -21,5 +21,6 @@ const appConfig =  {
 
 export default appConfig;
 
+ // https://jonathasborges1.github.io/creditoja/
 console.log("App Running... v.0.0.2")
 console.log("[CRITICAL DEBUG]: ", process.env.REACT_APP_API_KEY)
