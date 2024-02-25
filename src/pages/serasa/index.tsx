@@ -1,7 +1,7 @@
 import { useUserSession } from '@context/UserSessionContext';
 import { Grid } from '@mui/material';
 import Home from '@pages/home';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface Props {
    children?: React.ReactNode;
@@ -10,7 +10,10 @@ interface Props {
 const Serasa: React.FC<Props> = ({ children, ...props }) => {
 
    const { handleSerasa } = useUserSession();
-   handleSerasa(true);
+   
+   useEffect(() => {
+      handleSerasa(true);
+   },[handleSerasa]);
 
    return (
       <Grid>

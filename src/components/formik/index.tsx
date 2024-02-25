@@ -47,9 +47,12 @@ interface InitialValuesFormik {
 }
 
 const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
+   
    const { enqueueSnackbar } = useSnackbar();
    const { serasa } = useUserSession();
+
    const tagCurent = serasa ? "#serasa" : "#finanzero";
+   const [formikKey, setFormikKey] = useState(0);
 
    let initialValues: InitialValuesFormik = {
       name: '',
@@ -73,10 +76,11 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       tag: tagCurent,
       file: [],
    }
-   console.log(initialValues);
+
    useEffect(() => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       initialValues = {...initialValues, tag: tagCurent}
+      setFormikKey((prev) => prev + 1);
    },[serasa])
 
    const validationSchema = yup.object().shape({
@@ -145,6 +149,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
 
    return (
       <Formik
+         key={formikKey}
          initialValues={initialValues}
          validationSchema={validationSchema}
          onSubmit={async(values,actions) => {

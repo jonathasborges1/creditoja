@@ -12,11 +12,9 @@ const UserSessionProvider = ({children}) => {
 
    const initialSerasaValue = JSON.parse(Cookies.get('serasa') || 'false');
    const [serasa, setSerasa] = useState<boolean>(initialSerasaValue ?? false);
-   console.log("serasa- ",serasa);
+   console.log("serasa: ",serasa);
 
    const handleSerasa = (flag:boolean) => {
-      // const expires = 1 / 48; // 1 dia dividido por 48 (30 minutos)
-      // Cookies.set('serasa', JSON.stringify(flag), {expires} );
       Cookies.set('serasa', JSON.stringify(flag));
       setSerasa(flag);
    }
