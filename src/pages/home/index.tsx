@@ -46,11 +46,6 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
       return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-
-    // const handleRedirectForm = () => {
-    //     history.push(ROUTES.CONTACT);
-    // }
-
     const handleRedirectService = () => {
         history.push(ROUTES.SERVICES);
      }
@@ -214,14 +209,12 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
         <Grid container justifyContent={"center"} sx={{border: "0px solid blue", padding:0}} gap={1}>
 
             <Grid item xs={12} lg={12}  sx={{border: "0px solid red", marginBottom: isMobile ? "3rem" : "5rem",  }} >
+
 {/* ++++++++++++++++++++ Header ++++++++++++++++++++ */}
                 <Header></Header>
             </Grid>
 
-
-
 {/* +++++++++++ Body +++++++++++ */}
-
             <Grid item xs={12} sm={12} md={12} lg={12} sx={{border: "0px solid blue"}}>
                 <HomeSection></HomeSection>
             </Grid>
@@ -250,8 +243,6 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                 <OurMapsSection></OurMapsSection>
             </Grid>
 
-            
-            
             <Grid item xs={12} sm={10} md={10} lg={9} sx={{border: "0px solid blue"}}>
                 <Grid container justifyContent={"center"} sx={{textAlign: "center"}} gap={2}>
                     <Grid item xs={12} sm={9} md={9} lg={8} sx={{margin: 1,border: "0px solid red"}}>

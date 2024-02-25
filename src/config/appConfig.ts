@@ -14,6 +14,10 @@ const appConfig =  {
       name: "Jose Carlos",
       email: "creditoja@creditoja.net",
    },
+   userSerasa: {
+      name: "Jose Carlos",
+      email: "creditoja.serasa@creditoja.net"
+   },
    admin: {
       email: "jonathasborges0@gmail.com",
    }
@@ -22,5 +26,5 @@ const appConfig =  {
 export default appConfig;
 
  // https://jonathasborges1.github.io/creditoja/
-console.log("App Running... v.0.0.2")
-console.log("[CRITICAL DEBUG]: ", process.env.REACT_APP_API_KEY)
+console.log("App Running... v.0.0.3")
+// console.log("[CRITICAL DEBUG]: ", process.env.REACT_APP_API_KEY)

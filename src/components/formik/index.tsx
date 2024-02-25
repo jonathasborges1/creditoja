@@ -17,6 +17,7 @@ import appConfig from '@config/appConfig';
 import CircularStatic from "@components/circularProgressWithLabel";
 import DragInDropBox from "@components/dragInDropBox";
 import TextFieldCustomNumber from "@components/textFieldCustomNumber";
+import { useUserSession } from "@context/UserSessionContext";
 
 interface Props {
    children?: React.ReactNode;
@@ -30,6 +31,7 @@ interface InitialValuesFormik {
    cep: string;
    propertyPaid: string // Imovel esta quitado ?
    propertyValue: string; // Valor do Imovel
+   propertyAddress?: string; // Endereco do Imovel
    loanAmount: string; // Valor do emprestimo
    totalIncome: string; // Renda total Informada
    occupation: string; // Ocupacao
@@ -46,6 +48,7 @@ interface InitialValuesFormik {
 
 const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
    const { enqueueSnackbar } = useSnackbar();
+   const { serasa } = useUserSession();
 
    const initialValues: InitialValuesFormik = {
       name: '',
@@ -55,6 +58,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       cep: '',
       propertyPaid: '',
       propertyValue: '',
+      propertyAddress:'',
       loanAmount: '',
       totalIncome:'',
       occupation: '',
@@ -65,7 +69,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       termPeriod: '',
       hasDebitBalance: '',
       propertyRegistered: '',
-      tag: "#finanzero",
+      tag: serasa ? "#serasa" : "#finanzero",
       file: [],
    }
 
@@ -106,8 +110,9 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                   <li>Nome: ${valuesFormik?.name}</li>
                   <li>Email: ${valuesFormik?.email}</li>
                   <li>Telefone: ${phoneNumberMask(valuesFormik?.phone)}</li>
-
                   <li>CEP: ${valuesFormik?.cep}</li>
+
+                  <li>Endereço do Imovel: ${valuesFormik?.propertyAddress}</li>
                   <li>Imovel esta quitado: ${valuesFormik?.propertyPaid}</li>
                   <li>Valor do Imovel: ${valuesFormik?.propertyValue}</li>
                   <li>Valor do emprestimo: ${valuesFormik?.loanAmount}</li>
@@ -145,6 +150,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                cep: values.cep,
                propertyPaid: values.propertyPaid,
                propertyValue: values.propertyValue,
+               propertyAddress: values.propertyAddress,
                loanAmount: values.loanAmount,
                totalIncome: values.totalIncome,
                occupation: values.occupation,
@@ -158,6 +164,7 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                tag: values.tag,
                file: values.file,
             }
+
             setLoading(true);
 
             const attachmentList = fileData && fileData.map((file,index) => {
@@ -168,19 +175,23 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
             })
 
             try {
+               const emailCurrent = serasa ? appConfig.userSerasa.email : appConfig.user.email;
+               const subjectCurrent = serasa 
+                  ? 'Sistema de Notificação de Email CreditoJa - Lead Indicado pelo Serasa' 
+                  : 'Sistema de Notificação de Email CreditoJa - Lead Indicado pela Finanzero';
                const params = {
                   sender: {
                      name: appConfig.user.name,
-                     email: appConfig.user.email, 
+                     email: emailCurrent, 
                   },
                   to: [{
                      name: appConfig.user.name,
-                     email: appConfig.user.email, 
+                     email: emailCurrent, 
                   }],
                   cc: [{
                      email: appConfig.admin.email,
                   }],
-                  subject: "Sistema de Notificação de Email CreditoJa - Lead Indicado pela Finanzero",
+                  subject: subjectCurrent,
                   htmlContent: emailBody(payloadValuesFormik),
                   attachment: attachmentList
                }
@@ -202,10 +213,10 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
 
                setTimeout( () => {
                   window.location.href = "https://creditoja.net/";
-               },15000);
+               }, 15000);
 
             } catch (error) {
-               console.log("[DEBUG]: Erro ao enviar formulario -> ", error)
+               console.log("[DEBUG]: Erro ao enviar formulario -> ", error);
                enqueueSnackbar("Ocorreu um erro ao Enviar Seus Dados", {
                   variant: "error",
                 });
@@ -233,7 +244,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.name &&
                         Boolean(formikprops.errors.name)
                       }
-                     // required
                   />
                   <TextFieldCustom
                      type={"email"}
@@ -247,7 +257,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.email &&
                         Boolean(formikprops.errors.email)
                       }
-                     // required
                   />
                   <TextFieldPhone
                      type={"text"}
@@ -261,7 +270,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.phone &&
                         Boolean(formikprops.errors.phone)
                       }
-                     // required
                   />
                   {/* <TextFieldCurrency
                      type={"text"}
@@ -289,7 +297,19 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.cep &&
                         Boolean(formikprops.errors.cep)
                       }
-                     // required
+                  />
+                  <TextFieldCustom
+                     type={"text"}
+                     name={"propertyAddress"}
+                     label={"Endereço do Imovel"}
+                     value={formikprops.values.propertyAddress ?? ""}
+                     onChange={formikprops.handleChange}
+                     onBlur={formikprops.handleBlur}
+                     helperText={ formikprops.touched.propertyAddress && formikprops.errors.propertyAddress}
+                     error={
+                        formikprops.touched.propertyAddress &&
+                        Boolean(formikprops.errors.propertyAddress)
+                     }
                   />
                   <TextFieldCustom
                      type={"text"}
@@ -303,7 +323,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.propertyPaid &&
                         Boolean(formikprops.errors.propertyPaid)
                       }
-                     // required
                   />
                   <TextFieldCurrency
                      type={"text"}
@@ -317,7 +336,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.propertyValue &&
                         Boolean(formikprops.errors.propertyValue)
                       }
-                     // required
                   />
                   <TextFieldCurrency
                      type={"text"}
@@ -331,7 +349,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.loanAmount &&
                         Boolean(formikprops.errors.loanAmount)
                       }
-                     // required
                   />
                   <TextFieldCurrency
                      type={"text"}
@@ -345,7 +362,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.totalIncome &&
                         Boolean(formikprops.errors.totalIncome)
                       }
-                     // required
                   />
                   <TextFieldCustom
                      type={"text"}
@@ -359,7 +375,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.occupation &&
                         Boolean(formikprops.errors.occupation)
                       }
-                     // required
                   />
                   <TextFieldCustom
                      type={"text"}
@@ -373,7 +388,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                         formikprops.touched.civilStatus &&
                         Boolean(formikprops.errors.civilStatus)
                       }
-                     // required
                   />
                   <TextFieldCustom
                      type={"text"}
@@ -552,7 +566,6 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
                            background: "#149dcc", color: "#fff", padding: 1, pl: 4, pr: 4, fontSize: "1rem", 
                            "&:hover": {backgroundColor: '#90ee90', color: '#000'}
                         }}
-                        // disabled={uploadProgress < 100 || loading}
                      >
                         Enviar
                      </Button>

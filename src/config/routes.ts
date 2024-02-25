@@ -3,6 +3,7 @@ const ROUTES = {
     ABOUT: "/about/",
     CONTACT: "/contact/",
     SERVICES: "/services/",
+    SERASA: "/serasa/",
 }
 
 export default ROUTES;

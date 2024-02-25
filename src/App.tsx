@@ -1,11 +1,12 @@
 import React from 'react';
+import { ProviderContext, SnackbarProvider } from "notistack";
 
+import { ThemeProvider as ThemeProviderLegacy } from "@mui/styles";
 import { CssBaseline, IconButton } from '@mui/material';
 import { ThemeProvider  } from '@mui/material/styles';
-import { ThemeProvider as ThemeProviderLegacy } from "@mui/styles";
-import { ProviderContext, SnackbarProvider } from "notistack";
 import CloseIcon from '@mui/icons-material/Close';
 
+import { UserSessionProvider } from '@context/UserSessionContext';
 import Routes from './components/routes';
 import Theme from './theme';
 
@@ -13,10 +14,9 @@ const App: React.FC = () => {
 
   const notistackRef = React.useRef<ProviderContext>();
   const onClickDismiss = (key: string | number) => () => {
-    notistackRef &&
-      notistackRef.current &&
-      notistackRef.current.closeSnackbar(key);
+    notistackRef && notistackRef.current && notistackRef.current.closeSnackbar(key);
   };
+
   return(
     <ThemeProvider theme={Theme}>
       <ThemeProviderLegacy theme={Theme}>
@@ -32,9 +32,12 @@ const App: React.FC = () => {
                 </IconButton>
               )}
         >
-        <CssBaseline/> 
 
-        <Routes></Routes>
+          <UserSessionProvider>
+            <CssBaseline/> 
+            <Routes/>
+          </UserSessionProvider>
+
         </SnackbarProvider>
       </ThemeProviderLegacy>
     </ThemeProvider>
