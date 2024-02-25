@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import axios from 'axios';
 import { Form, Formik } from "formik";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSnackbar } from "notistack";
 
 import { Box, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
@@ -49,8 +49,9 @@ interface InitialValuesFormik {
 const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
    const { enqueueSnackbar } = useSnackbar();
    const { serasa } = useUserSession();
+   const tagCurent = serasa ? "#serasa" : "#finanzero";
 
-   const initialValues: InitialValuesFormik = {
+   let initialValues: InitialValuesFormik = {
       name: '',
       email: '',
       phone: '',
@@ -69,9 +70,14 @@ const FormikSendEmail: React.FC<Props> = ({ children, ...props }) => {
       termPeriod: '',
       hasDebitBalance: '',
       propertyRegistered: '',
-      tag: serasa ? "#serasa" : "#finanzero",
+      tag: tagCurent,
       file: [],
    }
+   console.log(initialValues);
+   useEffect(() => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      initialValues = {...initialValues, tag: tagCurent}
+   },[serasa])
 
    const validationSchema = yup.object().shape({
       email: yup
