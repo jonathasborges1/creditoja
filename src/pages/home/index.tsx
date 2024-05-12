@@ -75,7 +75,7 @@ const Home: React.FC<Props> = ({ children, ...props }) => {
                             color: "#fff",
                         }}
                     >
-                        Empréstimo com imóvel em garantia para empresas e pessoas negativadas</Typography>
+                         Empréstimo com garantia de imóvel</Typography>
                 </Grid>
                 <Grid item xs={12} lg={7} sx={{border: "0px solid blue", zIndex: 2 }} textAlign={"center"} >
                     <Typography variant='h6' 
