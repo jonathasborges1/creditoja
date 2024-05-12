@@ -26,7 +26,7 @@ const OurMapsSection: React.FC<Props> = ({ children, ...props }) => {
                           </Grid>
                           <Grid item xs={12} lg={12}>
                               <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Telefone:</Typography>
-                              <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}> Com: 2538-4752 | Cel: (11) 95339-6880</Typography>
+                              <Typography variant='body2' sx={{fontWeight: 500, fontSize:"1rem", color: "#fff"}}> Com: 2538-4752 | Cel: (11) 95339-6880 | (11) 96364-0668</Typography>
                           </Grid>
                           <Grid item xs={12} lg={12}>
                               <Typography variant='h6' sx={{fontWeight: 700, fontSize:"1.2rem"}}> Email:</Typography>
